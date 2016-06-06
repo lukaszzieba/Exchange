@@ -23,6 +23,9 @@ html, body {
 
 
 /*login */
+#login-dopdown {
+  cursor: pointer; 
+}
 
 #login-dp {
     width: 300px;
