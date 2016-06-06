@@ -16,6 +16,10 @@
             .state('home', {
                 url: "/home",
                 template: '<home></home>'
+            })
+            .state('currency', {
+                url: "/currency",
+                template: '<currency></currency>'
             });
     }
 
