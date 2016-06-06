@@ -11,9 +11,11 @@
         vm.data = [];
         vm.data = CurrencyService;
         console.log(vm.data);
+
         $scope.$watch('vm.data', function() {
           console.log('Changed');
         })
+
         // activate();
         //
         // function activate() {
