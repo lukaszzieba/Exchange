@@ -1,0 +1,58 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#wrapper {
+    min-height: 100%;
+    position: relative;
+}
+#container {
+    padding: 10px;
+    /* Height of the footer */
+    padding-bottom: 130px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+
+/*NAV*/
+
+
+/*----------------------------------------------------------------------------*/
+
+
+/*login */
+
+#login-dp {
+    width: 300px;
+    padding: 20%;
+}
+#login-dp form {
+    padding-top: 5%;
+}
+
+/*----------------------------------------------------------------------------*/
+
+
+/*FOOTER*/
+
+
+/*----------------------------------------------------------------------------*/
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer */
+    height: 130px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../img/footer.jpg");
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-position: center;
+}
+#footer p {
+    color: #dbdbdb;
+    padding-top: 40px;
+    text-align: center;
+}
