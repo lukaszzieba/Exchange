@@ -16,17 +16,15 @@
         $stateProvider
             .state('home', {
                 url: "/home",
-                template: '<home></home>',
-                params: {
-                    path: 'home'
-                }
+                template: '<home></home>'
             })
             .state('currency', {
                 url: "/currency",
-                template: '<currency></currency>',
-                params: {
-                    path: 'currency'
-                }
+                template: '<currency></currency>'
+            })
+            .state('register', {
+                url: "/register",
+                template: '<register></register>'              
             });
     }
 

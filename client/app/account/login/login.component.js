@@ -4,6 +4,7 @@
     angular
         .module('account.module')
         .component('accountNav', {
-            templateUrl: './app/account/nav/account-nav.html'
+            templateUrl: './app/account/login/login.html',
+            controller: 'LoginController'
         });
 }());
