@@ -4,7 +4,8 @@
     angular
         .module('exchangeApp')
         .component('currency', {
+            bindingd: {},
             templateUrl: './app/currency/currency.html',
-            controller : 'CurrnecyController'
+            controller : 'CurrencyController'
         });
 }());
