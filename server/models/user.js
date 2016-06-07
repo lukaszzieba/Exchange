@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    bcrypt = require('bcryptjs');
 
 var userSchema = mongoose.Schema({
     firstName: {
@@ -30,7 +31,7 @@ function createDefaultUsers() {
                 firstName: 'joe',
                 lastName: 'joe',
                 email: 'joe',
-                password: 'joe',
+                password: bcrypt.hashSync('joe', bcrypt.genSaltSync(10)),
                 wallet: [{
                     pln: 1000
                 }]

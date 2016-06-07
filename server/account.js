@@ -10,7 +10,6 @@ var token;
 var User = require('mongoose').model('User');
 
 function createToken(user) {
-    delete user.password;
     console.log(user);
     token = jwt.sign(_.omit(user, 'password'), config.secret, {
         expiresIn: 9000000
@@ -52,8 +51,14 @@ app.post('/register', function(req, res) {
             });
         }
         if (user) {
+            var userToken = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                wallet: user.wallet
+            }
             res.status(201).send({
-                id_token: createToken(user)
+                id_token: createToken(userToken)
             });
         }
     });
@@ -73,9 +78,14 @@ app.post('/login', function(req, res) {
             return res.status(401).send("User don't exist");
         }
         if (bcrypt.compareSync(req.body.password, user.password)) {
-            console.log(user);
+            var userToken = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                wallet: user.wallet
+            }
             res.status(201).send({
-                id_token: createToken(user)
+                id_token: createToken(userToken)
             });
 
         } else {
