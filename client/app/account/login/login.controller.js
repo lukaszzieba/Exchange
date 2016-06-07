@@ -8,18 +8,26 @@
 
     function LoginController($scope, LoginService, store, $state, IdentyService) {
         var vm = this;
-        console.log(IdentyService.currentUser);
+
         vm.login = function(userData) {
-            LoginService.login(userData)
-                .then(function(response) {
-                    store.set('jwt', response.data.id_token);
-                    var t = IdentyService.getDecodedToken();
-                    IdentyService.currentUser = t;
-                    console.log(t);
-                    $state.go('home');
-                }, function(err) {
-                    console.log(err);
-                })
+
+            $scope.login_form.submitted = false;
+
+            console.log($scope.login_form.$valid);
+            if ($scope.login_form.$valid) {
+                LoginService.login(userData)
+                    .then(function(response) {
+                        store.set('jwt', response.data.id_token);
+                        var t = IdentyService.getDecodedToken();
+                        IdentyService.currentUser = t;
+                        console.log(t);
+                        $state.go('home');
+                    }, function(err) {
+                        console.log(err);
+                    });
+            } else {
+                $scope.login_form.submitted = true;
+            }
         }
 
         vm.logOut = function() {
@@ -33,10 +41,9 @@
         function activate() {
 
         }
-
-        $('#btnSignin').on('click', function() {
-            // $("#dlDropDown").dropdown("toggle");
-             $(this).closest(".dropdown-menu").prev().dropdown("toggle");
-        });
+        // $('#btnSignin').on('click', function() {
+        //     // $("#dlDropDown").dropdown("toggle");
+        //     $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+        // });
     }
 }());

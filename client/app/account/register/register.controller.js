@@ -10,11 +10,11 @@
 
 
         $scope.signupForm = function(newUser) {
+
             $scope.signup_form.submitted = false;
-            console.log($scope.signup_form.$valid);
+
             if ($scope.signup_form.$valid) {
                 // Submit
-
                 RegisterService.registerUser(newUser).
                 then(function(response) {
                     store.set('jwt', response.data.id_token);
@@ -24,8 +24,6 @@
                 }, function(err) {
                     console.log(err);
                 });
-
-
             } else {
                 $scope.signup_form.submitted = true;
             }
