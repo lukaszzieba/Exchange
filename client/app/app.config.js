@@ -24,7 +24,7 @@
             })
             .state('register', {
                 url: "/register",
-                template: '<register></register>'              
+                template: '<register></register>'
             });
     }
 
@@ -35,6 +35,7 @@
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
             $rootScope.currentState = toState.name;
         });
+
     }
 
 

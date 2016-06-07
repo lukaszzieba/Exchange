@@ -113,3 +113,7 @@ html, body {
     padding-top: 40px;
     text-align: center;
 }
+.alert {
+  margin: 0;
+  padding: 7px;
+}
