@@ -4,7 +4,9 @@
     angular
         .module('account.module', [
             // vendor
-            'ui.router'
+            'ui.router',
+            'angular-storage',
+            'angular-jwt'
         ]);
 
 }());
