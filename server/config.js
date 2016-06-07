@@ -3,6 +3,7 @@ var path = require('path'),
 
 module.exports = {
   rootPath : rootPath,
+  db : 'mongodb://localhost/exchange',
   port: 8080,
   secret: 'asdqwezxc'
 };

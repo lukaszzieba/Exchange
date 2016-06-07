@@ -3,15 +3,10 @@ var express = require('express'),
     config = require('./config'),
     jwt = require('jsonwebtoken');
 
-var app = express.Router(),
-    token;
 
-// Will be Miongo DB or something else
-var users = [{
-    id: 1,
-    email: 'finch',
-    password: 'finch'
-}];
+var app = express.Router();
+var token;
+var User = require('mongoose').model('User');
 
 function createToken(user) {
     token = jwt.sign(_.omit(user, 'password'), config.secret, {
@@ -27,19 +22,36 @@ app.post('/register', function(req, res) {
     if (!req.body.email || !req.body.password) {
         return res.status(400).send("You must send the username and the password");
     }
-    if (_.find(users, {
-            username: req.body.email
-        })) {
-        return res.status(400).send("A user with that username already exists");
-    }
+    User.findOne({
+        email: req.body.email
+    }, function(err, user) {
+        if (user) {
+            return res.status(400).send("A user with that username already exists");
+        }
+    });
+    var user = {};
+    user.firstName = req.body.name;
+    user.lastName = req.body.lastName;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    user.wallet = []
 
-    var profile = _.pick(req.body, 'email', 'password');
-    profile.id = _.max(users, 'id').id + 1;
-
-    users.push(profile);
-
-    res.status(201).send({
-        id_token: createToken(profile)
+    User.create(user, function(err, user) {
+        if (err) {
+            if (err.toString().indexOf('E11000') > -1) {
+                console.log('Error: ' + err);
+                err = new Error('Duplicate username');
+            }
+            res.status(400);
+            return res.send({
+                reason: err.toString()
+            });
+        }
+        if (user) {
+            res.status(201).send({
+                id_token: createToken(user)
+            });
+        }
     });
 });
 
@@ -47,20 +59,21 @@ app.post('/login', function(req, res) {
     if (!req.body.email || !req.body.password) {
         return res.status(400).send("You must send the username and the password");
     }
-
-    var user = _.find(users, {
+    User.findOne({
         email: req.body.email
-    });
-    if (!user) {
-        return res.status(401).send("The username or password don't match");
-    }
-
-    if (!user.password === req.body.password) {
-        return res.status(401).send("The username or password don't match");
-    }
-
-    res.status(201).send({
-        id_token: createToken(user)
+    }, function(err, user) {
+        if (err) {
+            return res.status(401).send(err);
+        }
+        if (!user) {
+            return res.status(401).send("The username or password don't match");
+        }
+        if (!user.password === req.body.password) {
+            return res.status(401).send("The username or password don't match");
+        }
+        res.status(201).send({
+            id_token: createToken(user)
+        });
     });
 });
 
