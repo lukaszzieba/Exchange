@@ -1,5 +1,6 @@
 var express = require('express'),
     _ = require('lodash'),
+    bcrypt = require('bcryptjs'),
     config = require('./config'),
     jwt = require('jsonwebtoken');
 
@@ -9,6 +10,8 @@ var token;
 var User = require('mongoose').model('User');
 
 function createToken(user) {
+    delete user.password;
+    console.log(user);
     token = jwt.sign(_.omit(user, 'password'), config.secret, {
         expiresIn: 9000000
     });
@@ -29,11 +32,12 @@ app.post('/register', function(req, res) {
             return res.status(400).send("A user with that username already exists");
         }
     });
+    var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = {};
     user.firstName = req.body.name;
     user.lastName = req.body.lastName;
     user.email = req.body.email;
-    user.password = req.body.password;
+    user.password = hash;
     user.wallet = []
 
     User.create(user, function(err, user) {
@@ -66,14 +70,17 @@ app.post('/login', function(req, res) {
             return res.status(401).send(err);
         }
         if (!user) {
+            return res.status(401).send("User don't exist");
+        }
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+            console.log(user);
+            res.status(201).send({
+                id_token: createToken(user)
+            });
+
+        } else {
             return res.status(401).send("The username or password don't match");
         }
-        if (!user.password === req.body.password) {
-            return res.status(401).send("The username or password don't match");
-        }
-        res.status(201).send({
-            id_token: createToken(user)
-        });
     });
 });
 

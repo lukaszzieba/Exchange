@@ -14,6 +14,10 @@ var userSchema = mongoose.Schema({
         required: '{PATH} is required',
         unique: true
     },
+    password: {
+        type: String,
+        required: '{PATH} is required'
+    },
     wallet: []
 });
 
