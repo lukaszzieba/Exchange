@@ -15,6 +15,9 @@
                 <th>
                     Value
                 </th>
+                <th ng-if="$ctrl.showAction()">
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +31,51 @@
                 <td>
                     {{cur.PurchasePrice}}
                 </td>
+                <td ng-if="$ctrl.showAction()">
+                    <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Buy</button>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <div class="panel-footer">Publication date:
         {{$ctrl.data.collection[0].PublicationDate | date:'short'}}</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$ctrl.cur | json}}
+                <h4 class="modal-title" id="exampleModalLabel">Buy
+                    {{$ctrl.cur.Name}}</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="value" class="control-label">Purchase Price is
+                            {{$ctrl.cur.PurchasePrice}}
+                            for
+                            {{$ctrl.cur.Unit}}</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="ammount" class="control-label">Ammount:</label>
+                        <input type="number" class="form-control" id="ammount" ng-model="ammount">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Total price:</label>
+                        <textarea class="form-control" id="message-text" ng-model="toPay"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
 </div>

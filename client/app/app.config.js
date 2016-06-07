@@ -25,6 +25,10 @@
             .state('register', {
                 url: "/register",
                 template: '<register></register>'
+            })
+            .state('exchange', {
+                url: "/exchange",
+                template: '<exchange></exchange>'
             });
     }
 
