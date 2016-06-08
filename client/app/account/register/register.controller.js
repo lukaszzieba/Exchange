@@ -10,7 +10,7 @@
 
 
         $scope.signupForm = function(newUser) {
-
+            console.log('asd');
             $scope.signup_form.submitted = false;
 
             if ($scope.signup_form.$valid) {

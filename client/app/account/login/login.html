@@ -21,10 +21,10 @@
                                 Twitter</a>
                         </div>
                         or -->
-                        <form name="login_form" ng-submit="$ctrl.login(userData)" class="form" role="form" id="login-nav" novalidate>
+                        <form name="login_form" ng-submit="$ctrl.login($ctrl.userData)" class="form" role="form" id="login-nav" novalidate>
                             <div class="form-group">
                                 <label class="sr-only" for="emali">Email address</label>
-                                <input type="text" ng-model="userData.email" class="form-control" id="emali" name="email" placeholder="Email address" required>
+                                <input type="text" ng-model="$ctrl.userData.email" class="form-control" id="emali" name="email" placeholder="Email address" required>
                                 <div class="error" ng-show="login_form.email.$dirty && login_form.email.$invalid && login_form.submitted ||
                                           login_form.email.$pristine && login_form.email.$invalid && login_form.submitted">
                                     <div class="alert alert-danger" ng-show="login_form.email.$error.required" role="alert">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="password">Password</label>
-                                <input type="password" ng-model="userData.password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                <input type="password" ng-model="$ctrl.userData.password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 <div class="error" ng-show="login_form.password.$dirty && login_form.password.$invalid && login_form.submitted ||
                                           login_form.password.$pristine && login_form.password.$invalid && login_form.submitted">
                                     <div class="alert alert-danger" ng-show="login_form.password.$error.required" role="alert">

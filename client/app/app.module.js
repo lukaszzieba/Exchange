@@ -6,7 +6,9 @@
             // vendor
             'ui.router',
             'ngWebSocket',
-            
+            'angular-storage',
+            'angular-jwt',
+
             // dev
             'account.module'
         ]);

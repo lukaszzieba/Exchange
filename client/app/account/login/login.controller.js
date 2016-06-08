@@ -8,7 +8,7 @@
 
     function LoginController($scope, LoginService, store, $state, IdentyService) {
         var vm = this;
-
+        vm.userData = {}
         vm.login = function(userData) {
 
             $scope.login_form.submitted = false;
@@ -21,18 +21,20 @@
                         var t = IdentyService.getDecodedToken();
                         IdentyService.currentUser = t;
                         console.log(t);
-                        $state.go('home');
+                        $state.go('exchange');
+                        vm.userData = {}
                     }, function(err) {
                         console.log(err);
                     });
             } else {
-                $scope.login_form.submitted = true;
+                $scope.login_form.submitted = true;                
             }
         }
 
         vm.logOut = function() {
             LoginService.signOut();
             IdentyService.currentUser = undefined;
+            $state.go('home');
         }
 
         vm.identy = IdentyService;
