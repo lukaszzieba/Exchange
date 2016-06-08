@@ -5,6 +5,6 @@
         .module('account.module')
         .component('profile', {
             templateUrl: './app/account/profile/profile.html',
-            controller : 'ProfileController'
+            controller: 'ProflieController'
         });
 }());

@@ -1,40 +1,16 @@
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
-</ul>
-
-<div class="col-md-5 col-md-offset-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Define wallet</h3>
-        </div>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Currency
-                    </th>
-                    <th>
-                        Units
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="cur in $ctrl.profile.wallet">
-                    <td>
-                        {{cur.code}}
-                    </td>
-                    <td>
-                        <input  class="form-control" type="number" min="0" step="{{cur.unit}}" name="units" ng-model="cur.ammount">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="panel-footer">
-            <button class="btn btn-primary" ng-click="$ctrl.saveWallet()">Save wallet</button>
-        </div>
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <ul class="nav nav-tabs">
+            <li  ng-class="{'active' : $ctrl.isActive('profile.main')}" role="presentation">
+                <a ui-sref="profile.main">Main</a>
+            </li>
+            <li ng-class="{'active' : $ctrl.isActive('profile.user')}" role="presentation">
+                <a   ui-sref="profile.user">User data</a>
+            </li>
+            <li ng-class="{'active' : $ctrl.isActive('profile.wallet')}"  role="presentation">
+                <a ui-sref="profile.wallet">Wallet</a>
+            </li>
+        </ul>
+        <ui-view></ui-view>
     </div>
 </div>

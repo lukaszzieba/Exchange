@@ -40,7 +40,29 @@
                 data: {
                     requireLogin: true
                 }
+            })
+            .state('profile.main', {
+                url: "/main",
+                template: '<main></main>',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('profile.user', {
+                url: "/user",
+                template: '<user></user>',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('profile.wallet', {
+                url: "/wallet",
+                template: '<define-wallet></define-wallet>',
+                data: {
+                    requireLogin: true
+                }
             });
+
 
         // jwt interceptor gets token fom local storage and send to server with any request
         jwtInterceptorProvider.tokenGetter = function(store) {
@@ -67,7 +89,7 @@
         });
 
         // set currentState on $rootScope fot shell nav active class
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {            
             $rootScope.currentState = toState.name;
         });
     }

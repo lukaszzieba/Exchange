@@ -1,38 +1,21 @@
 (function() {
+
     'use strict';
 
     angular
-        .module('exchangeApp')
-        .controller('ProfileController', ProfileController);
-    ProfileController.$inject = ['ProfileService'];
+        .module('account.module')
+        .controller('ProflieController', ProflieController);
+    ProflieController.$inject = ['$rootScope'];
 
-    function ProfileController(ProfileService) {
+    function ProflieController($rootScope) {
         var vm = this;
-        vm.profile;
-        
-
+        vm.isActive = function(state) {
+            return state === $rootScope.currentState;
+        }
         activate();
 
         function activate() {
-            return getProfile()
-                .then(function() {
-                    console.log('Activate proflie');
-                });
-        }
 
-        function getProfile() {
-            return ProfileService.getFullProfile()
-                .then(function(data) {
-                    vm.profile = data;
-                    return vm.profile;
-                });
-        }
-
-        vm.saveWallet = function() {
-            ProfileService.saveWallet(vm.profile.wallet)
-                .then(function(data) {
-                  console.log(data);
-                });
         }
     }
-}());
+}())

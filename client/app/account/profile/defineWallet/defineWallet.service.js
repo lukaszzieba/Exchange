@@ -3,10 +3,10 @@
 
     angular
         .module('account.module')
-        .factory('ProfileService', ProfileService);
-    ProfileService.$inject = ['$http'];
+        .factory('DefineWalletService', DefineWalletService);
+    DefineWalletService.$inject = ['$http'];
 
-    function ProfileService($http) {
+    function DefineWalletService($http) {
         return {
             getFullProfile: getFullProfile,
             saveWallet: saveWallet
