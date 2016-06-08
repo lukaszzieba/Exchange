@@ -4,15 +4,35 @@
     angular
         .module('exchangeApp')
         .controller('ProfileController', ProfileController);
-    ProfileController.$inject = [];
+    ProfileController.$inject = ['ProfileService'];
 
-    function ProfileController() {
+    function ProfileController(ProfileService) {
         var vm = this;
+        vm.profile;
+        
 
         activate();
 
         function activate() {
+            return getProfile()
+                .then(function() {
+                    console.log('Activate proflie');
+                });
+        }
 
+        function getProfile() {
+            return ProfileService.getFullProfile()
+                .then(function(data) {
+                    vm.profile = data;
+                    return vm.profile;
+                });
+        }
+
+        vm.saveWallet = function() {
+            ProfileService.saveWallet(vm.profile.wallet)
+                .then(function(data) {
+                  console.log(data);
+                });
         }
     }
 }());

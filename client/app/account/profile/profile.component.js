@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('exchangeApp')
+        .module('account.module')
         .component('profile', {
             templateUrl: './app/account/profile/profile.html',
             controller : 'ProfileController'
