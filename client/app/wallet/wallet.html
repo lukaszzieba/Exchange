@@ -16,19 +16,32 @@
                     Ammount
                 </th>
                 <th>
-                  Value
+                    Value
                 </th>
                 <th>
-                  Action
+                    Action
                 </th>
             </tr>
         </thead>
         <tbody>
-
+            <tr ng-repeat="cur in $ctrl.wallet" ng-if="cur.code !== 'PLN' && cur.ammount !== 0">
+                <td>
+                    {{cur.code}}
+                </td>
+                <td></td>
+                <td>
+                    {{cur.ammount}}
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-success" type="button" name="button">Sell</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 
     <div class="panel-footer">
-      Avilable PLN: {{$ctrl.wallet.pln}}
+        Avilable PLN:
+        {{$ctrl.wallet[0].ammount}}
     </div>
 </div>

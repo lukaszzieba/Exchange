@@ -4,14 +4,13 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', '$scope', '$rootScope', 'IdentyService', '$http'];
+    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'lodash', '$scope', '$rootScope', 'IdentyService', '$http'];
 
-    function CurrencyController(CurrencyService, $scope, $rootScope, IdentyService, $http) {
+    function CurrencyController(CurrencyService, WalletService, lodash, $scope, $rootScope, IdentyService, $http) {
         var vm = this;
         vm.data = [];
         vm.data = CurrencyService;
-        console.log(vm.data);
-
+        // console.log(vm.data);
         // $scope.$watch('vm.data', function() {
         //     console.log('Changed');
         // });
@@ -23,11 +22,20 @@
         vm.buy = function(currency) {
             vm.cur = currency;
         }
-        vm.buySubmit  = function(currency) {
-          console.log('Buy submit');
-          // $scope.toPay
-          // $scope.ammount
-          // vm.cur.PurchasePrice
+        vm.buySubmit = function(currency) {
+            // var oldWallet = WalletService.wallet;
+            var buyData = {
+                code: vm.cur.Code,
+                ammount: $scope.ammount,
+                toPay: $scope.toPay
+            }
+            $http.put('/api/protected/buy', buyData).then(function(responese) {
+                console.log(responese);
+                WalletService.wallet = responese;
+            }, function(err) {
+                console.log('Error: ' + err);
+            });
+
         }
         $scope.ammount = 0;
         $scope.toPay = 0;

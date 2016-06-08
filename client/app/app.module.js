@@ -8,6 +8,7 @@
             'ngWebSocket',
             'angular-storage',
             'angular-jwt',
+            'ngLodash',
 
             // dev
             'account.module'

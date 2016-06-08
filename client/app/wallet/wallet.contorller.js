@@ -23,7 +23,7 @@
         function getWallet() {
             return WalletService.getWallet()
                 .then(function(data) {
-                    vm.wallet = data[0];
+                  vm.wallet = data;
                     return vm.wallet;
                 });
         }

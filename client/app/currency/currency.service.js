@@ -35,17 +35,17 @@
         var collection = [];
 
         dataStream.onOpen(function() {
-            console.log('Connected to ws');
+            // console.log('Connected to ws');
         });
 
         dataStream.onMessage(function(message) {
-            console.log(message);
+            // console.log(message);
             if (collection.length !== 0) {
                 collection.splice(0, 1);
-                console.log('DELETE');
+                // console.log('DELETE');
             }
             collection.push(JSON.parse(message.data));
-            console.log(collection);
+            // console.log(collection);
             // for graph
             // collection.push(JSON.parse(message.data));
         });
