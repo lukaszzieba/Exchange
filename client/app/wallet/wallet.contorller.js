@@ -64,10 +64,11 @@
         });
 
         vm.sellSubmit = function(currency) {
+          console.log('Sell sublit');
             var sellData = {
-                code: vm.cur.Code,
-                ammount: $scope.ammount,
-                toPay: $scope.toPay
+                code: vm.cur.code,
+                sellUnits: $scope.ammount,
+                toGet: $scope.toGet
             }
             clearSellData();
             SellService.sell(sellData)
@@ -85,8 +86,9 @@
 
         function clearSellData() {
             vm.cur = {};
+            $scope.youHave = 0;
             $scope.ammount = 0;
-            $scope.toPay = 0;
+            $scope.toGet = 0;
         }
 
         $('#sellModal').on('hide.bs.modal', function(event) {

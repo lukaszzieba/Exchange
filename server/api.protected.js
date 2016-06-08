@@ -32,7 +32,6 @@ app.post('/api/protected/wallet', function(req, res) {
 });
 
 app.put('/api/protected/buy', function(req, res) {
-    console.log(req.body);
     User.findOne({
         email: req.user.email
     }, function(err, user) {
@@ -46,6 +45,25 @@ app.put('/api/protected/buy', function(req, res) {
             }).ammount += req.body.ammount;
             user.save();
             return res.status(200).json(user.wallet);
+        }
+    });
+});
+
+app.put('/api/protected/sell', function(req, res) {
+    console.log(req.body);
+    User.findOne({
+        email: req.user.email
+    }, function(err, user) {
+        if (user) {
+          _.find(user.wallet, function(c) {
+              return c.code === 'PLN';
+          }).ammount += req.body.toGet;
+
+          _.find(user.wallet, function(c) {
+              return c.code === req.body.code;
+          }).ammount -= req.body.sellUnits;
+          user.save();
+          return res.status(200).json(user.wallet);
         }
     });
 });

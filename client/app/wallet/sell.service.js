@@ -4,11 +4,24 @@
     angular
         .module('exchangeApp')
         .factory('SellService', SellService);
-    SellService.$inject = [];
+    SellService.$inject = ['$http'];
 
-    function SellService() {
+    function SellService($http) {
         return {
+            sell: sell
+        }
 
+        function sell(sellData) {
+            return $http.put('/api/protected/sell', sellData)
+                .then(sellSuccess, sellFail);
+
+            function sellSuccess(responese) {
+                return responese.data;
+            }
+
+            function sellFail() {
+                console.log('XHR Failed for getWallet.');
+            }
         }
     }
 }());
