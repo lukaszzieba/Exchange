@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', '$http'];
+    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', '$http', '$filter'];
 
-    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, $http) {
+    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, $http, $filter) {
         var vm = this;
         vm.currencies = [];
         vm.currencies = CurrencyService;
@@ -18,20 +18,28 @@
 
         // for buing currency
         vm.cur = {};
+        $scope.ammount = 0;
+        $scope.toPay = 0;
+        var p;
         vm.buy = function(currency) {
             vm.cur = currency;
         }
-        $scope.ammount = 0;
-        $scope.toPay = 0;
+
         $scope.$watch('ammount', function() {
-            $scope.toPay = $scope.ammount * vm.cur.PurchasePrice;
+            if (vm.cur.Unit === 1) {
+                $scope.toPay = $scope.ammount * vm.cur.PurchasePrice;
+            } else if (vm.cur.Unit === 100) {
+                $scope.toPay = ($scope.ammount / 100) * vm.cur.PurchasePrice;
+            }
         });
+
         vm.buySubmit = function(currency) {
             var buyData = {
                 code: vm.cur.Code,
                 ammount: $scope.ammount,
                 toPay: $scope.toPay
             }
+            clearBuyData();
             BuyService.buy(buyData)
                 .then(function(wallet) {
                     WalletService.wallet = wallet;
@@ -39,6 +47,21 @@
 
                 })
         }
+
+        vm.cancelBuy = function() {
+            $('#exampleModal').modal('hide');
+            clearBuyData();
+        }
+
+        function clearBuyData() {
+            vm.cur = {};
+            $scope.ammount = 0;
+            $scope.toPay = 0;
+        }
+
+        $('#exampleModal').on('hide.bs.modal', function(event) {
+          clearBuyData();
+        });
 
         // tets api
         vm.public = function() {

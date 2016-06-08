@@ -30,14 +30,20 @@
         // getting current sell price
         vm.getUintPrice = function(cur) {
             var price = 0;
-            vm.currencies[0].Items.forEach(function(item) {
-                if (item.Code === cur.code) {
-                    price = item.SellPrice;
-                    console.log(price);
-                }
-            });
+            if (vm.currencies.length !== 0 && vm.currencies[0].Items !== undefined) {
+                vm.currencies[0].Items.forEach(function(item) {
+                    if (item.Code === cur.code) {
+                        price = item.SellPrice;
+                    }
+                });
+            }
             return price;
         }
-        
+
+        vm.getValue = function(cur) {
+            var unitPrice = vm.getUintPrice(cur);
+            return (cur.ammount / cur.unit) * unitPrice;
+        }
+
     }
 }());

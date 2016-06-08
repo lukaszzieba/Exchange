@@ -35,7 +35,7 @@
                     {{cur.ammount}}
                 </td>
                 <td>
-                  {{$ctrl.getUintPrice(cur) * cur.ammount | currency : 'zł ' }}
+                  {{$ctrl.getValue(cur) | currency : 'zł ' }}
                 </td>
                 <td>
                     <button class="btn btn-success" type="button" name="button">Sell</button>
