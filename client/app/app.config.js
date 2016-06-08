@@ -33,6 +33,13 @@
                 data: {
                     requireLogin: true
                 }
+            })
+            .state('profile', {
+                url: "/profile",
+                template: '<profile></profile>',
+                data: {
+                    requireLogin: true
+                }
             });
 
         // jwt interceptor gets token fom local storage and send to server with any request
