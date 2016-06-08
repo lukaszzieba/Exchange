@@ -4,49 +4,62 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', '$scope', '$rootScope', 'IdentyService', '$http'];
+    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', '$http', '$filter'];
 
-    function CurrencyController(CurrencyService, $scope, $rootScope, IdentyService, $http) {
+    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, $http, $filter) {
         var vm = this;
-        vm.data = [];
-        vm.data = CurrencyService;
-        console.log(vm.data);
+        vm.currencies = [];
+        vm.currencies = CurrencyService;
 
-        // $scope.$watch('vm.data', function() {
-        //     console.log('Changed');
-        // });
-
+        // show/hide buy button
         vm.showAction = function() {
             return IdentyService.isAuthenticated() && $rootScope.currentState === 'exchange';
         };
+
+        // for buing currency
         vm.cur = {};
-        vm.buy = function(currency) {
-            vm.cur = currency;
-        }
         $scope.ammount = 0;
         $scope.toPay = 0;
+        var p;
+        vm.buy = function(currency) {
+            vm.cur = currency;
+        };
+
         $scope.$watch('ammount', function() {
-            $scope.toPay = $scope.ammount * vm.cur.PurchasePrice;
+            $scope.toPay = ($scope.ammount / vm.cur.Unit) * vm.cur.PurchasePrice;
         });
 
-        // activate();
-        //
-        // function activate() {
-        //     return getCurrencies()
-        //         .then(function() {
-        //             console.log('Currencies view active');
-        //             console.log(vm.data);
-        //         });
-        // }
-        //
-        // function getCurrencies() {
-        //     return CurrencyService.getCurrencies()
-        //         .then(function(data) {
-        //             vm.data = data;
-        //             return vm.data;
-        //         });
-        // }
+        vm.buySubmit = function(currency) {
+            var buyData = {
+                code: vm.cur.Code,
+                ammount: $scope.ammount,
+                toPay: $scope.toPay
+            }
+            clearBuyData();
+            BuyService.buy(buyData)
+                .then(function(wallet) {
+                    WalletService.wallet = wallet;
+                }, function() {
 
+                })
+        };
+
+        vm.cancelBuy = function() {
+            $('#buyModal').modal('hide');
+            clearBuyData();
+        };
+
+        function clearBuyData() {
+            vm.cur = {};
+            $scope.ammount = 0;
+            $scope.toPay = 0;
+        }
+
+        $('#buyModal').on('hide.bs.modal', function(event) {
+            clearBuyData();
+        });
+
+        // tets api
         vm.public = function() {
             $http.get('/api/public').then(function(responese) {
                 console.log(responese);
@@ -54,7 +67,7 @@
             }, function(err) {
                 console.log(err);
             });
-        }
+        };
 
         vm.protected = function() {
             $http.get('/api/protected/wallet').then(function(responese) {
@@ -63,6 +76,6 @@
             }, function(err) {
                 console.log(err.data);
             });
-        }
+        };
     }
 }());

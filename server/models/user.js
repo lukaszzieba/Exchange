@@ -19,7 +19,11 @@ var userSchema = mongoose.Schema({
         type: String,
         required: '{PATH} is required'
     },
-    wallet: []
+    wallet: [{
+        unit: Number,
+        code: String,
+        ammount: Number
+    }]
 });
 
 var User = mongoose.model('User', userSchema);
@@ -33,7 +37,33 @@ function createDefaultUsers() {
                 email: 'joe',
                 password: bcrypt.hashSync('joe', bcrypt.genSaltSync(10)),
                 wallet: [{
-                    pln: 1000
+                    unit: 1,
+                    code: 'PLN',
+                    ammount: 1000
+                }, {
+                    unit: 1,
+                    code: 'GBP',
+                    ammount: 100
+                }, {
+                    unit: 1,
+                    code: 'EUR',
+                    ammount: 100
+                }, {
+                    unit: 1,
+                    code: 'USD',
+                    ammount: 0
+                }, {
+                    unit: 100,
+                    code: 'CZK',
+                    ammount: 0
+                }, {
+                    unit: 1,
+                    code: 'CHF',
+                    ammount: 0
+                }, {
+                    unit: 100,
+                    code: 'RUB',
+                    ammount: 0
                 }]
             });
         }

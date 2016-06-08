@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="cur in $ctrl.data.collection[0].Items">
+            <tr ng-repeat="cur in $ctrl.currencies.collection[0].Items">
                 <td>
                     {{cur.Code}}
                 </td>
@@ -29,65 +29,82 @@
                     {{cur.Unit}}
                 </td>
                 <td>
-                    {{cur.PurchasePrice}}
+                    {{cur.PurchasePrice  | currency : ''}}
                 </td>
                 <td ng-if="$ctrl.showAction()">
-                    <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Buy</button>
+                    <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#buyModal" data-whatever="@mdo">Buy</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
     <div class="panel-footer">Publication date:
-        {{$ctrl.data.collection[0].PublicationDate | date:'short'}}</div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">test petected api</h3>
-  </div>
-  <div class="panel-body">
-    <button ng-click="$ctrl.protected()" type="button" name="button">Get protected</button>
-    <button ng-click="$ctrl.public()" type="button" name="button">Get public</button>
-  </div>
-  <div class="panel-footer">
-    {{$ctrl.message}}
-  </div>
+        {{$ctrl.currencies.collection[0].PublicationDate | date:'short'}}</div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">test petected api</h3>
+    </div>
+    <div class="panel-body">
+        <button ng-click="$ctrl.protected()" type="button" name="button">Get protected</button>
+        <button ng-click="$ctrl.public()" type="button" name="button">Get public</button>
+    </div>
+    <div class="panel-footer">
+        {{$ctrl.message}}
+    </div>
+</div>
+
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                {{$ctrl.cur | json}}
-                <h4 class="modal-title" id="exampleModalLabel">Buy
+                <h4 class="modal-title" id="buyModalLabel">Buy
                     {{$ctrl.cur.Name}}</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="value" class="control-label">Purchase Price is
-                            {{$ctrl.cur.PurchasePrice}}
+                        <h3>
+                            Current value
+                            {{$ctrl.cur.PurchasePrice | currency : ''}}
                             for
-                            {{$ctrl.cur.Unit}}</label>
-
+                            {{$ctrl.cur.Unit}}
+                            {{$ctrl.cur.Code}}
+                        </h3>
                     </div>
                     <div class="form-group">
                         <label for="ammount" class="control-label">Ammount:</label>
-                        <input type="number" class="form-control" id="ammount" ng-model="ammount">
+                        <input type="number" step='{{$ctrl.cur.Unit}}' class="form-control" min="0" id="ammount" ng-model="ammount">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="control-label">Total price:</label>
-                        <textarea class="form-control" id="message-text" ng-model="toPay"></textarea>
+                        <label for="total-price" class="control-label">Total price:</label>
+                        <p id="toPay">
+                            {{ toPay | currency : ''}}
+                        </p>
+
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <!-- ng-click="$ctrl.buySubmit()" -->
+                <button ng-click="$ctrl.buySubmit()" type="button" class="btn btn-default" data-dismiss="modal">Buy</button>
+                <button ng-click="$ctrl.cancelBuy()" type="button" class="btn btn-primary">Cancel</button>
             </div>
         </div>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                $('#buyModal').on('show.bs.modal', function(event) {
+                    setTimeout(function() {
+
+                        $('#buyModal').modal('hide');
+
+                    }, 20000);
+                })
+            });
+        </script>
     </div>
-</div>
