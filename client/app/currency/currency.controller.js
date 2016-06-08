@@ -23,6 +23,12 @@
         vm.buy = function(currency) {
             vm.cur = currency;
         }
+        vm.buySubmit  = function(currency) {
+          console.log('Buy submit');
+          // $scope.toPay
+          // $scope.ammount
+          // vm.cur.PurchasePrice
+        }
         $scope.ammount = 0;
         $scope.toPay = 0;
         $scope.$watch('ammount', function() {
