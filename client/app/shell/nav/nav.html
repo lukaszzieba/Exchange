@@ -21,7 +21,7 @@
                         <li ng-class="{'active' : $ctrl.isActive('currency')}">
                             <a ui-sref="currency">Currencies</a>
                         </li>
-                        <li ng-class="{'active' : $ctrl.isActive('exchange')}">
+                        <li ng-if="$ctrl.identy.isAuthenticated()" ng-class="{'active' : $ctrl.isActive('exchange')}">
                             <a ui-sref="exchange">Exchange</a>
                         </li>
 

@@ -41,6 +41,18 @@
     <div class="panel-footer">Publication date:
         {{$ctrl.data.collection[0].PublicationDate | date:'short'}}</div>
 </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">test petected api</h3>
+  </div>
+  <div class="panel-body">
+    <button ng-click="$ctrl.protected()" type="button" name="button">Get protected</button>
+    <button ng-click="$ctrl.public()" type="button" name="button">Get public</button>
+  </div>
+  <div class="panel-footer">
+    {{$ctrl.message}}
+  </div>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">

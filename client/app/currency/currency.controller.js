@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', '$scope', '$rootScope', 'IdentyService'];
+    CurrencyController.$inject = ['CurrencyService', '$scope', '$rootScope', 'IdentyService', '$http'];
 
-    function CurrencyController(CurrencyService, $scope, $rootScope, IdentyService) {
+    function CurrencyController(CurrencyService, $scope, $rootScope, IdentyService, $http) {
         var vm = this;
         vm.data = [];
         vm.data = CurrencyService;
@@ -46,5 +46,23 @@
         //             return vm.data;
         //         });
         // }
+
+        vm.public = function() {
+            $http.get('/api/public').then(function(responese) {
+                console.log(responese);
+                vm.message = responese.data;
+            }, function(err) {
+                console.log(err);
+            });
+        }
+
+        vm.protected = function() {
+            $http.get('/api/protected/wallet').then(function(responese) {
+                console.log(responese);
+                vm.message = responese.data;
+            }, function(err) {
+                console.log(err.data);
+            });
+        }
     }
 }());
