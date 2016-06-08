@@ -32,7 +32,7 @@
                     {{cur.PurchasePrice  | currency : ''}}
                 </td>
                 <td ng-if="$ctrl.showAction()">
-                    <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Buy</button>
+                    <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#buyModal" data-whatever="@mdo">Buy</button>
                 </td>
             </tr>
         </tbody>
@@ -55,14 +55,14 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="exampleModalLabel">Buy
+                <h4 class="modal-title" id="buyModalLabel">Buy
                     {{$ctrl.cur.Name}}</h4>
             </div>
             <div class="modal-body">
@@ -83,7 +83,7 @@
                     <div class="form-group">
                         <label for="total-price" class="control-label">Total price:</label>
                         <p id="toPay">
-                          {{ toPay | currency : ''}}
+                            {{ toPay | currency : ''}}
                         </p>
 
                     </div>
@@ -98,10 +98,10 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $('#exampleModal').on('show.bs.modal', function(event) {
+                $('#buyModal').on('show.bs.modal', function(event) {
                     setTimeout(function() {
 
-                        $('#exampleModal').modal('hide');
+                        $('#buyModal').modal('hide');
 
                     }, 20000);
                 })

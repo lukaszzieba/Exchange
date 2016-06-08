@@ -23,7 +23,7 @@
         var p;
         vm.buy = function(currency) {
             vm.cur = currency;
-        }
+        };
 
         $scope.$watch('ammount', function() {
             if (vm.cur.Unit === 1) {
@@ -46,12 +46,12 @@
                 }, function() {
 
                 })
-        }
+        };
 
         vm.cancelBuy = function() {
-            $('#exampleModal').modal('hide');
+            $('#buyModal').modal('hide');
             clearBuyData();
-        }
+        };
 
         function clearBuyData() {
             vm.cur = {};
@@ -59,8 +59,8 @@
             $scope.toPay = 0;
         }
 
-        $('#exampleModal').on('hide.bs.modal', function(event) {
-          clearBuyData();
+        $('#buyModal').on('hide.bs.modal', function(event) {
+            clearBuyData();
         });
 
         // tets api
@@ -71,7 +71,7 @@
             }, function(err) {
                 console.log(err);
             });
-        }
+        };
 
         vm.protected = function() {
             $http.get('/api/protected/wallet').then(function(responese) {
@@ -80,6 +80,6 @@
             }, function(err) {
                 console.log(err.data);
             });
-        }
+        };
     }
 }());

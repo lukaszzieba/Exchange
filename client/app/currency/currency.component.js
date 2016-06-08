@@ -6,6 +6,6 @@
         .component('currency', {
             bindingd: {},
             templateUrl: './app/currency/currency.html',
-            controller : 'CurrencyController'
+            controller: 'CurrencyController'
         });
 }());

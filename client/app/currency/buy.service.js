@@ -15,7 +15,7 @@
             return $http.put('/api/protected/buy', buyData)
                 .then(buySuccess, buyFail);
 
-            function buySuccess(responese) {                
+            function buySuccess(responese) {
                 return responese.data;
             }
 
