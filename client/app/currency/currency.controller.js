@@ -26,11 +26,7 @@
         };
 
         $scope.$watch('ammount', function() {
-            if (vm.cur.Unit === 1) {
-                $scope.toPay = $scope.ammount * vm.cur.PurchasePrice;
-            } else if (vm.cur.Unit === 100) {
-                $scope.toPay = ($scope.ammount / 100) * vm.cur.PurchasePrice;
-            }
+            $scope.toPay = ($scope.ammount / vm.cur.Unit) * vm.cur.PurchasePrice;
         });
 
         vm.buySubmit = function(currency) {
