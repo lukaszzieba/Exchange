@@ -8,7 +8,6 @@
 
     function CurrencyService($http, $websocket) {
         // Data form static file
-
         // return {
         //     getCurrencies: getCurrencies
         // };
@@ -28,7 +27,6 @@
         // }
 
         //Data form WebSocket
-
         // Open a WebSocket connection
         var dataStream = $websocket('ws://webtask.future-processing.com:8068/ws/currencies');
 

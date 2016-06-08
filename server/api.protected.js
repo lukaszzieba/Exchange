@@ -45,6 +45,7 @@ app.put('/api/protected/buy', function(req, res) {
                 return c.code === req.body.code;
             }).ammount += req.body.ammount;
             user.save();
+            return res.status(200).json(user.wallet);
         }
     });
 });

@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="cur in $ctrl.data.collection[0].Items">
+            <tr ng-repeat="cur in $ctrl.currencies.collection[0].Items">
                 <td>
                     {{cur.Code}}
                 </td>
@@ -39,7 +39,7 @@
     </table>
 
     <div class="panel-footer">Publication date:
-        {{$ctrl.data.collection[0].PublicationDate | date:'short'}}</div>
+        {{$ctrl.currencies.collection[0].PublicationDate | date:'short'}}</div>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">

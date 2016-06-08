@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="cur in $ctrl.wallet" ng-if="cur.code !== 'PLN' && cur.ammount !== 0">
+            <tr ng-repeat="cur in $ctrl.userWallet.wallet" ng-if="cur.code !== 'PLN' && cur.ammount !== 0">
                 <td>
                     {{cur.code}}
                 </td>
@@ -42,6 +42,6 @@
 
     <div class="panel-footer">
         Avilable PLN:
-        {{$ctrl.wallet[0].ammount}}
+        {{$ctrl.userWallet.wallet[0].ammount}}
     </div>
 </div>

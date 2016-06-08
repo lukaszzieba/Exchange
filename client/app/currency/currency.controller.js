@@ -4,63 +4,43 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'lodash', '$scope', '$rootScope', 'IdentyService', '$http'];
+    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', '$http'];
 
-    function CurrencyController(CurrencyService, WalletService, lodash, $scope, $rootScope, IdentyService, $http) {
+    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, $http) {
         var vm = this;
-        vm.data = [];
-        vm.data = CurrencyService;
-        // console.log(vm.data);
-        // $scope.$watch('vm.data', function() {
-        //     console.log('Changed');
-        // });
+        vm.currencies = [];
+        vm.currencies = CurrencyService;
 
+        // show/hide buy button
         vm.showAction = function() {
             return IdentyService.isAuthenticated() && $rootScope.currentState === 'exchange';
         };
+
+        // for buing currency
         vm.cur = {};
         vm.buy = function(currency) {
             vm.cur = currency;
-        }
-        vm.buySubmit = function(currency) {
-            // var oldWallet = WalletService.wallet;
-            var buyData = {
-                code: vm.cur.Code,
-                ammount: $scope.ammount,
-                toPay: $scope.toPay
-            }
-            $http.put('/api/protected/buy', buyData).then(function(responese) {
-                console.log(responese);
-                WalletService.wallet = responese;
-            }, function(err) {
-                console.log('Error: ' + err);
-            });
-
         }
         $scope.ammount = 0;
         $scope.toPay = 0;
         $scope.$watch('ammount', function() {
             $scope.toPay = $scope.ammount * vm.cur.PurchasePrice;
         });
+        vm.buySubmit = function(currency) {
+            var buyData = {
+                code: vm.cur.Code,
+                ammount: $scope.ammount,
+                toPay: $scope.toPay
+            }
+            BuyService.buy(buyData)
+                .then(function(wallet) {
+                    WalletService.wallet = wallet;
+                }, function() {
 
-        // activate();
-        //
-        // function activate() {
-        //     return getCurrencies()
-        //         .then(function() {
-        //             console.log('Currencies view active');
-        //             console.log(vm.data);
-        //         });
-        // }
-        //
-        // function getCurrencies() {
-        //     return CurrencyService.getCurrencies()
-        //         .then(function(data) {
-        //             vm.data = data;
-        //             return vm.data;
-        //         });
-        // }
+                })
+        }
 
+        // tets api
         vm.public = function() {
             $http.get('/api/public').then(function(responese) {
                 console.log(responese);

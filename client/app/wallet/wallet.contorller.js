@@ -8,14 +8,12 @@
 
     function WalletController(WalletService) {
         var vm = this;
-        vm.wallet = []
+        vm.userWallet = WalletService
         activate();
 
         function activate() {
             return getWallet()
-                .then(function() {
-                    console.log('Wallet');
-                    console.log(vm.wallet);
+                .then(function() {                  
                     console.log('Activate wallet');
                 });
         }

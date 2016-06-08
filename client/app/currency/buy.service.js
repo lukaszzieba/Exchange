@@ -11,13 +11,17 @@
             buy: buy
         }
 
-        function buy() {
-            return $http.put('/api/protected/buy', buyData).then(function(responese) {
-                console.log(responese);
-            }, function(err) {
-                console.log('Error: ' + err);
-            });
+        function buy(buyData) {
+            return $http.put('/api/protected/buy', buyData)
+                .then(buySuccess, buyFail);
+
+            function buySuccess(responese) {                
+                return responese.data;
+            }
+
+            function buyFail() {
+                console.log('XHR Failed for getWallet.');
+            }
         }
     }
-
 }());
