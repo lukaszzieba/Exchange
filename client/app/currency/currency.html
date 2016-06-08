@@ -29,7 +29,7 @@
                     {{cur.Unit}}
                 </td>
                 <td>
-                    {{cur.PurchasePrice}}
+                    {{cur.PurchasePrice  | currency : ''}}
                 </td>
                 <td ng-if="$ctrl.showAction()">
                     <button ng-click="$ctrl.buy(cur)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Buy</button>

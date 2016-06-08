@@ -28,11 +28,15 @@
                 <td>
                     {{cur.code}}
                 </td>
-                <td></td>
+                <td>
+                    {{$ctrl.getUintPrice(cur) | currency : ''}}
+                </td>
                 <td>
                     {{cur.ammount}}
                 </td>
-                <td></td>
+                <td>
+                  {{$ctrl.getUintPrice(cur) * cur.ammount | currency : 'zł ' }}
+                </td>
                 <td>
                     <button class="btn btn-success" type="button" name="button">Sell</button>
                 </td>
@@ -40,8 +44,9 @@
         </tbody>
     </table>
 
+
     <div class="panel-footer">
         Avilable PLN:
-        {{$ctrl.userWallet.wallet[0].ammount}}
+        {{$ctrl.userWallet.wallet[0].ammount | currency : ''}}
     </div>
 </div>
