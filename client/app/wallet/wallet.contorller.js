@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .controller('WalletController', WalletController);
-    WalletController.$inject = ['WalletService', 'CurrencyService', 'SellService', '$scope'];
+    WalletController.$inject = ['WalletService', 'CurrencyService', 'SellService', 'ToastrService', '$scope'];
 
-    function WalletController(WalletService, CurrencyService, SellService, $scope) {
+    function WalletController(WalletService, CurrencyService, SellService, ToastrService, $scope) {
         var vm = this;
         vm.userWallet = WalletService;
         vm.currencies = CurrencyService.collection;
@@ -58,9 +58,28 @@
             $('#sellDialog').modal('show');
         };
 
+        function getAmmount() {
+            var money;
+            vm.userWallet.wallet.forEach(function(item) {
+                if (item.code === vm.cur.code) {
+                    console.log(item);
+                    money = item.ammount;
+                }
+            });
+            return money;
+        }
+
         vm.sellSubmit = function() {
-            $("#sellDialog").removeClass("fade").modal("hide");
-            $("#sellConfirmDialog").modal("show").addClass("fade");
+            var have = getAmmount();
+            if ($scope.ammount === undefined) {
+                ToastrService.showToastr(false, 'You dont have enough money')
+                return;
+            }
+            
+            if ($scope.ammount !== 0) {
+                $("#sellDialog").removeClass("fade").modal("hide");
+                $("#sellConfirmDialog").modal("show").addClass("fade");
+            }
         }
 
         $scope.$watch('ammount', function(newVal) {
@@ -80,7 +99,7 @@
                     WalletService.wallet = wallet;
                     console.log(wallet);
                 }, function() {
-                  console.log('Error');
+                    console.log('Error');
                 })
             $('#sellConfirmDialog').modal('hide');
         };

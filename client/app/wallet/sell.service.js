@@ -19,8 +19,9 @@
                 return responese.data;
             }
 
-            function sellFail() {
-                console.log('XHR Failed for getWallet.');
+            function sellFail(err) {
+              ToastrService.showToastr(false, err.data.msg)
+              return err;
             }
         }
     }

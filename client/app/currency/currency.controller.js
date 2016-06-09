@@ -33,6 +33,7 @@
 
 
         vm.buySubmit = function(currency) {
+          if($scope.ammount !== 0 && $scope.toPay !==0) {
             if (vm.userWallet.wallet[0].ammount < $scope.toPay) {
                 $("#buyDialog").modal("hide");
                 $("#confirmDialog").modal("hide");
@@ -42,6 +43,7 @@
             }
             $("#buyDialog").removeClass("fade").modal("hide");
             $("#confirmDialog").modal("show").addClass("fade");
+          }            
         };
 
         vm.buyConfirm = function() {
