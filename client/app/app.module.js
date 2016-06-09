@@ -9,6 +9,7 @@
             'angular-storage',
             'angular-jwt',
             'ngAnimate',
+            'toastr',
 
 
             // dev

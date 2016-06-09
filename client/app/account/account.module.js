@@ -6,7 +6,8 @@
             // vendor
             'ui.router',
             'angular-storage',
-            'angular-jwt'
+            'angular-jwt',
+            'toastr'
         ]);
 
 }());

@@ -17,10 +17,12 @@
                 // Submit
                 RegisterService.registerUser(newUser).
                 then(function(response) {
-                    store.set('jwt', response.data.id_token);
-                    var t = IdentyService.getDecodedToken();
-                    IdentyService.currentUser = t;
-                    $state.go('exchange');
+                    if (response.data && response.data.success) {
+                        store.set('jwt', response.data.id_token);
+                        var t = IdentyService.getDecodedToken();
+                        IdentyService.currentUser = t;
+                        $state.go('exchange');
+                    }
                 }, function(err) {
                     console.log(err);
                 });

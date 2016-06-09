@@ -16,12 +16,15 @@
             console.log($scope.login_form.$valid);
             if ($scope.login_form.$valid) {
                 LoginService.login(userData)
-                    .then(function(response) {
-                        store.set('jwt', response.data.id_token);
-                        var t = IdentyService.getDecodedToken();
-                        IdentyService.currentUser = t;                        
-                        $state.go('exchange');
-                        vm.userData = {}
+                    .then(function(response) {                        
+                        if (response.data && response.data.success) {
+                            store.set('jwt', response.data.id_token);
+                            var t = IdentyService.getDecodedToken();
+                            IdentyService.currentUser = t;
+                            $state.go('exchange');
+                            vm.userData = {}
+                        }
+
                     }, function(err) {
                         console.log(err);
                     });

@@ -4,9 +4,9 @@
     angular
         .module('account.module')
         .factory('RegisterService', RegisterService);
-    RegisterService.$inject = ['$http'];
+    RegisterService.$inject = ['$http', 'ToastrService'];
 
-    function RegisterService($http) {
+    function RegisterService($http, ToastrService) {
         return {
             registerUser: registerUser
         }
@@ -19,11 +19,13 @@
             }).then(registerSuccess, registerFail)
 
             function registerSuccess(respone) {
+                ToastrService.showToastr(true, respone.data.msg);
                 return respone;
             }
 
             function registerFail(err) {
-                console.log(err.data);
+                ToastrService.showToastr(false, err.data.msg)
+                return err;
             }
         }
 
