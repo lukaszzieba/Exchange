@@ -4,6 +4,7 @@
     angular
         .module('exchangeApp')
         .factory('BuyService', BuyService);
+        
     BuyService.$inject = ['$http', 'ToastrService']
 
     function BuyService($http, ToastrService) {

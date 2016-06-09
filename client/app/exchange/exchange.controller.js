@@ -6,12 +6,6 @@
         .controller('ExchangeController', ExchangeController);
 
     function ExchangeController() {
-        var vm = this;
-
-        activate();
-
-        function activate() {
-
-        }
+        var vm = this;      
     }
 }());

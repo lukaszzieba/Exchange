@@ -4,6 +4,7 @@
     angular
         .module('exchangeApp')
         .factory('SellService', SellService);
+
     SellService.$inject = ['$http', 'ToastrService'];
 
     function SellService($http, ToastrService) {
@@ -20,8 +21,8 @@
             }
 
             function sellFail(err) {
-              ToastrService.showToastr(false, err.data.msg)
-              return err;
+                ToastrService.showToastr(false, err.data.msg)
+                return err;
             }
         }
     }

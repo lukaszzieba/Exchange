@@ -8,9 +8,9 @@
     UserCpntroller.$inject = ['$scope', 'UserService'];
 
     function UserCpntroller($scope, UserService) {
-        $scope.updateUser = {}
-        $scope.signupForm = function(user) {
+        $scope.updateUser = {};
 
+        $scope.signupForm = function(user) {
             $scope.update_form.submitted = false;
 
             if ($scope.update_form.$valid) {
@@ -30,16 +30,15 @@
             return getUser()
                 .then(function() {
                     console.log('Update user active');
-                })
+                });
         }
 
         function getUser() {
             return UserService.getUser()
                 .then(function(data) {
-                    console.log(data);
                     $scope.updateUser = data;
                     return $scope.updateUser;
-                })
+                });
         }
     }
 }());

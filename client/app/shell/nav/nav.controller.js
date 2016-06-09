@@ -10,14 +10,8 @@
     function NavController($rootScope, $scope, IdentyService) {
         var vm = this;
         vm.isActive = function(state) {
-          return state === $rootScope.currentState;
+            return state === $rootScope.currentState;
         }
-        vm.identy = IdentyService;
-        activate();
-
-        function activate() {
-
-        }
+        vm.identy = IdentyService;        
     }
-
 }());

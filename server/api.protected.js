@@ -16,11 +16,7 @@ app.get('/api/protected/user', function(req, res) {
     User.findOne({
         email: req.user.email
     }, function(err, user) {
-        if (user) {
-            // var toUpdate = {
-            //     firstName: user.firstName,
-            //     lastName: user.lastName
-            // }
+        if (user) {          
             return res.status(200).json(user);
         }
     });

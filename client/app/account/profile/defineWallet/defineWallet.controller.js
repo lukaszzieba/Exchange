@@ -4,6 +4,7 @@
     angular
         .module('exchangeApp')
         .controller('DefineWalletController', DefineWalletController);
+
     DefineWalletController.$inject = ['DefineWalletService', '$scope'];
 
     function DefineWalletController(DefineWalletService, $scope) {
@@ -36,7 +37,6 @@
                         console.log(data);
                     });
             }
-            console.log('invalid');
-        }
+        };
     }
 }());

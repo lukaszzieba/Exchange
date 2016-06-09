@@ -164,8 +164,7 @@ html, body {
         opacity: 0;
     }
 }
-
 .toast-top-right {
-  top: 50px;
-  right: 12px;
+    top: 50px;
+    right: 12px;
 }

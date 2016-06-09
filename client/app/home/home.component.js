@@ -4,6 +4,6 @@
     angular
         .module('exchangeApp')
         .component('home', {
-            templateUrl: './app/home/home.html'            
+            templateUrl: './app/home/home.html'
         });
 }());

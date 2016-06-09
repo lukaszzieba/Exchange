@@ -12,15 +12,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         Login:
-                        <!-- <div class="social-buttons">
-                            <a href="#" class="btn btn-fb">
-                                <i class="fa fa-facebook"></i>
-                                Facebook</a>
-                            <a href="#" class="btn btn-tw">
-                                <i class="fa fa-twitter"></i>
-                                Twitter</a>
-                        </div>
-                        or -->
                         <form name="login_form" ng-submit="$ctrl.login($ctrl.userData)" class="form" role="form" id="login-nav" novalidate>
                             <div class="form-group">
                                 <label class="sr-only" for="emali">Email address</label>
@@ -50,20 +41,11 @@
                                         Password is required.
                                     </div>
                                 </div>
-                                <!-- <div class="help-block text-right">
-                                    <a href="">Forget the password ?</a>
-                                </div> -->
+
                             </div>
                             <div class="form-group">
                                 <button type="submit" id="btnSignin" class="btn btn-primary btn-block">Sign in</button>
                             </div>
-
-                            <!-- <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">
-                                    keep me logged-in
-                                </label>
-                            </div> -->
                         </form>
                     </div>
                     <div class="bottom text-center">
@@ -84,9 +66,6 @@
             <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-            <!-- <li ng-show="identity.currentUser.isAdmin()">
-                <a href="/admin/users">User Admin</a>
-            </li> -->
             <li>
                 <a ui-sref="profile.main">Profile</a>
             </li>
