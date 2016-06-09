@@ -39,7 +39,7 @@
     </table>
 
     <div class="panel-footer">Publication date:
-        {{$ctrl.currencies.collection[0].PublicationDate | date:'short'}}</div>
+        {{$ctrl.currencies.collection[0].PublicationDate | date:'dd.MM.yyyy H:mm' : '+0200'}}</div>
 </div>
 
 <div id="buyDialog" class="modal fade">
