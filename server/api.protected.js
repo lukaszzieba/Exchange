@@ -16,13 +16,30 @@ app.get('/api/protected/user', function(req, res) {
         email: req.user.email
     }, function(err, user) {
         if (user) {
+            // var toUpdate = {
+            //     firstName: user.firstName,
+            //     lastName: user.lastName
+            // }
             return res.status(200).json(user);
         }
     });
 });
 
 app.put('/api/protected/user', function(req, res) {
-  console.log(req.body);
+    User.findOne({
+        email: req.user.email
+    }, function(err, user) {
+        if (user) {
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+            user.save();
+            return res.status(200).json(user);
+        }
+    });
+});
+
+app.put('/api/protected/wallet', function(req, res) {
+    console.log(req.body);
     User.findOne({
         email: req.user.email
     }, function(err, user) {

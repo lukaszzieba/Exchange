@@ -24,13 +24,18 @@
                         <form name="login_form" ng-submit="$ctrl.login($ctrl.userData)" class="form" role="form" id="login-nav" novalidate>
                             <div class="form-group">
                                 <label class="sr-only" for="emali">Email address</label>
-                                <input type="text" ng-model="$ctrl.userData.email" class="form-control" id="emali" name="email" placeholder="Email address" required>
+                                <input type="email" ng-model="$ctrl.userData.email" class="form-control" id="emali" name="email" placeholder="Email address" required>
                                 <div class="error" ng-show="login_form.email.$dirty && login_form.email.$invalid && login_form.submitted ||
                                           login_form.email.$pristine && login_form.email.$invalid && login_form.submitted">
                                     <div class="alert alert-danger" ng-show="login_form.email.$error.required" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
                                         Email is required.
+                                    </div>
+                                    <div class="alert alert-danger" ng-show="login_form.email.$error.email" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Please enter valid email.
                                     </div>
                                 </div>
                             </div>

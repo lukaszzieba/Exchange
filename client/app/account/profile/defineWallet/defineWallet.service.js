@@ -26,7 +26,7 @@
         }
 
         function saveWallet(wallet) {
-            return $http.put('/api/protected/user', wallet)
+            return $http.put('/api/protected/wallet', wallet)
                 .then(updateWalletSuccess, updateWalletFail);
 
             function updateWalletSuccess(response) {

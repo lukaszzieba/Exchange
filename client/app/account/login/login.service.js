@@ -27,13 +27,12 @@
             }
 
             function loginFail(err) {
-                // Log
-                console.log(err.data);
+                console.log('XHR Failed for login.');
             }
         }
 
         function signOut() {
-            store.remove('jwt');                       
+            store.remove('jwt');
         }
     }
 }())

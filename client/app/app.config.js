@@ -25,7 +25,10 @@
             })
             .state('register', {
                 url: "/register",
-                template: '<register></register>'
+                template: '<register></register>',
+                data: {
+                    notAllowLogedInUsers: true
+                }
             })
             .state('exchange', {
                 url: "/exchange",
@@ -79,17 +82,23 @@
 
         // prvent unauthenticated user go to excahnge
         $rootScope.$on('$stateChangeStart', function(e, to) {
-            console.log('state change');
+            var jwt = store.get('jwt');
             if (to.data && to.data.requireLogin) {
-                if (!store.get('jwt')) {
+                if (!jwt) {
                     e.preventDefault();
                     $state.go('home');
+                }
+            }
+            if (to.data && to.data.notAllowLogedInUsers) {
+                if (jwt) {
+                    e.preventDefault();
+                    $state.go('exchange');
                 }
             }
         });
 
         // set currentState on $rootScope fot shell nav active class
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {            
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
             $rootScope.currentState = toState.name;
         });
     }
