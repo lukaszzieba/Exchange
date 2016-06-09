@@ -52,10 +52,12 @@
             }
             clearBuyData();
             BuyService.buy(buyData)
-                .then(function(wallet) {
-                    WalletService.wallet = wallet;
-                }, function() {
-
+                .then(function(data) {
+                  if(data.success) {
+                    WalletService.wallet = data.wallet;
+                  }
+                }, function(err) {
+                  console.log('Buy fail');
                 })
             $("#confirmDialog").modal("hide");
         }

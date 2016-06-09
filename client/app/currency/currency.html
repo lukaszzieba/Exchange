@@ -93,7 +93,7 @@
                 <h4>Confirm</h4>
             </div>
             <div class="modal-body">
-                Are you sure to {{ammount}} {{$ctrl.cur.Code}}  buy for {{toPay}}??
+                Are you sure to {{ammount}} {{$ctrl.cur.Code}}  buy for {{toPay | currency : ''}}??
             </div>
             <div class="modal-footer">
                   <button ng-click="$ctrl.buyConfirm()" type="button" name="button" class="btn btn-primary">Buy</button>
