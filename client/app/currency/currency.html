@@ -83,6 +83,7 @@
         </div>
     </div>
 </div>
+
 <div id="confirmDialog" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,12 +94,15 @@
                 <h4>Confirm</h4>
             </div>
             <div class="modal-body">
-                Are you sure to {{ammount}} {{$ctrl.cur.Code}}  buy for {{toPay | currency : ''}}??
+                Are you sure to
+                {{ammount}}
+                {{$ctrl.cur.Code}}
+                buy for
+                {{toPay | currency : ''}}??
             </div>
             <div class="modal-footer">
-                  <button ng-click="$ctrl.buyConfirm()" type="button" name="button" class="btn btn-primary">Buy</button>
-                  <button ng-click="$ctrl.cancelBuy();" type="button" name="button" class="btn btn-primary">Cancel</button>
-              </div>
+                <button ng-click="$ctrl.buyConfirm()" type="button" name="button" class="btn btn-primary">Buy</button>
+                <button ng-click="$ctrl.cancelBuy();" type="button" name="button" class="btn btn-primary">Cancel</button>
             </div>
         </div>
     </div>

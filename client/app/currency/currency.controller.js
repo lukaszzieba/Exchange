@@ -33,17 +33,17 @@
 
 
         vm.buySubmit = function(currency) {
-          if($scope.ammount !== 0 && $scope.toPay !==0) {
-            if (vm.userWallet.wallet[0].ammount < $scope.toPay) {
-                $("#buyDialog").modal("hide");
-                $("#confirmDialog").modal("hide");
-                clearBuyData();
-                ToastrService.showToastr(false, 'You dont have enough money')
-                return;
+            if ($scope.ammount !== 0 && $scope.toPay !== 0) {
+                if (vm.userWallet.wallet[0].ammount < $scope.toPay) {
+                    $("#buyDialog").modal("hide");
+                    $("#confirmDialog").modal("hide");
+                    clearBuyData();
+                    ToastrService.showToastr(false, 'You dont have enough money')
+                    return;
+                }
+                $("#buyDialog").removeClass("fade").modal("hide");
+                $("#confirmDialog").modal("show").addClass("fade");
             }
-            $("#buyDialog").removeClass("fade").modal("hide");
-            $("#confirmDialog").modal("show").addClass("fade");
-          }            
         };
 
         vm.buyConfirm = function() {
@@ -55,11 +55,11 @@
             clearBuyData();
             BuyService.buy(buyData)
                 .then(function(data) {
-                  if(data.success) {
-                    WalletService.wallet = data.wallet;
-                  }
+                    if (data.success) {
+                        WalletService.wallet = data.wallet;
+                    }
                 }, function(err) {
-                  console.log('Buy fail');
+                    console.log('Buy fail');
                 })
             $("#confirmDialog").modal("hide");
         }

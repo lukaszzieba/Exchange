@@ -1,5 +1,4 @@
 (function() {
-
     'use strict';
 
     angular
@@ -38,4 +37,4 @@
             store.remove('jwt');
         }
     }
-}())
+}());

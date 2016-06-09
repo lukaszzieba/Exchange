@@ -12,6 +12,7 @@
             showToastr: showToastr
         }
 
+        // show toastr depand on success ture/fale
         function showToastr(success, msg) {
             if (success) {
                 toastr.success(msg, 'Success');
@@ -19,6 +20,5 @@
                 toastr.error(msg, 'Error');
             }
         }
-
     }
 }());

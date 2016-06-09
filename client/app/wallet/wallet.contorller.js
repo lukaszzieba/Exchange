@@ -21,8 +21,7 @@
 
         function getWallet() {
             return WalletService.getWallet()
-                .then(function(data) {
-                    console.log(data);
+                .then(function(data) {                  
                     if (data.success) {
                         vm.userWallet = data.wallet;
                         return vm.wallet;

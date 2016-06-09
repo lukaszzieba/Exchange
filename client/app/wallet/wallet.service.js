@@ -4,6 +4,7 @@
     angular
         .module('exchangeApp')
         .factory('WalletService', WalletService);
+
     WalletService.$inject = ['$http', 'ToastrService'];
 
     function WalletService($http, ToastrService) {

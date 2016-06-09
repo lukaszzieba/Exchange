@@ -5,6 +5,6 @@
         .module('account.module')
         .component('defineWallet', {
             templateUrl: './app/account/profile/defineWallet/defineWallet.html',
-            controller : 'DefineWalletController'
+            controller: 'DefineWalletController'
         });
 }());

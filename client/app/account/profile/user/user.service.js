@@ -1,5 +1,4 @@
 (function() {
-
     'use strict';
 
     angular
@@ -28,16 +27,16 @@
         }
 
         function updateUser(user) {
-          return $http.put('/api/protected/user', user)
-              .then(updateUserSuccuess, updateUserFali);
+            return $http.put('/api/protected/user', user)
+                .then(updateUserSuccuess, updateUserFali);
 
-          function updateUserSuccuess(responese) {
-              return responese.data;
-          }
+            function updateUserSuccuess(responese) {
+                return responese.data;
+            }
 
-          function updateUserFali() {
-              console.log('XHR Failed for updateUser.');
-          }
+            function updateUserFali() {
+                console.log('XHR Failed for updateUser.');
+            }
         }
     }
 }());

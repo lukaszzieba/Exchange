@@ -4,6 +4,7 @@
     angular
         .module('account.module')
         .factory('RegisterService', RegisterService);
+
     RegisterService.$inject = ['$http', 'ToastrService'];
 
     function RegisterService($http, ToastrService) {
@@ -28,7 +29,5 @@
                 return err;
             }
         }
-
     }
-
 }());

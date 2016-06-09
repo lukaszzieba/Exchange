@@ -4,6 +4,7 @@
     angular
         .module('account.module')
         .factory('DefineWalletService', DefineWalletService);
+
     DefineWalletService.$inject = ['$http'];
 
     function DefineWalletService($http) {

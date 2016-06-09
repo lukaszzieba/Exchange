@@ -5,6 +5,6 @@
         .module('exchangeApp')
         .component('exchange', {
             templateUrl: './app/exchange/exchange.html',
-            controller : 'ExchangeController'
+            controller: 'ExchangeController'
         });
 }());

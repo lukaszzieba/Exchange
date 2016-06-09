@@ -4,6 +4,6 @@
     angular
         .module('account.module')
         .component('main', {
-            templateUrl: './app/account/profile/main/main.html',          
+            templateUrl: './app/account/profile/main/main.html',
         });
 }());

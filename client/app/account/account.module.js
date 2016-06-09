@@ -9,5 +9,4 @@
             'angular-jwt',
             'toastr'
         ]);
-
 }());
