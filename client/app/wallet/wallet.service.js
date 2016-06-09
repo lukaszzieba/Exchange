@@ -4,14 +4,14 @@
     angular
         .module('exchangeApp')
         .factory('WalletService', WalletService);
-        
+
     WalletService.$inject = ['$http', 'ToastrService'];
 
     function WalletService($http, ToastrService) {
         var wallet;
         return {
             wallet: wallet,
-            getWallet: getWallets
+            getWallet: getWallet
         };
 
         function getWallet() {
