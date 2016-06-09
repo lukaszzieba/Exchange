@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="cur in $ctrl.userWallet.wallet" ng-if="cur.code !== 'PLN' && cur.ammount !== 0">
+            <tr class="repeated-item" ng-repeat="cur in $ctrl.userWallet.wallet" ng-if="cur.code !== 'PLN' && cur.ammount !== 0">
                 <td>
                     {{cur.code}}
                 </td>
