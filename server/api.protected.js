@@ -73,7 +73,6 @@ app.post('/api/protected/wallet', function(req, res) {
 });
 
 app.put('/api/protected/buy', function(req, res) {
-    console.log(req.body);
     Exchange.findOne({}, function(err, exchange) {
         var curToBuy = _.find(exchange.currencies, function(w) {
             return w.code === req.body.code;
@@ -82,7 +81,7 @@ app.put('/api/protected/buy', function(req, res) {
             return res.status(400).send({
                 success: false,
                 msg: 'Sorry currently we have ' + curToBuy.ammount + ' ' + req.body.code + '.\nPlease tyy again leater.'
-            })
+            });
         } else {
             curToBuy.ammount -= req.body.ammount;
             exchange.save();
@@ -110,19 +109,36 @@ app.put('/api/protected/buy', function(req, res) {
 
 app.put('/api/protected/sell', function(req, res) {
     console.log(req.body);
-    User.findOne({
-        email: req.user.email
-    }, function(err, user) {
-        if (user) {
-            _.find(user.wallet, function(c) {
-                return c.code === 'PLN';
-            }).ammount += req.body.toGet;
+    Exchange.findOne({}, function(err, exchange) {
+        var pln = _.find(exchange.currencies, function(w) {
+            return w.code === 'PLN';
+        });
+        if (pln.ammount < req.body.toGet) {
+            return res.status(400).send({
+                success: false,
+                msg: 'Sorry currently we have ' + pln.ammount + ' ' + pln.code + '.\nPlease tyy again leater.'
+            })
+        } else {
+            pln.ammount -= req.body.toGet;
+            exchange.save();
+            User.findOne({
+                email: req.user.email
+            }, function(err, user) {
+                if (user) {
+                    _.find(user.wallet, function(c) {
+                        return c.code === 'PLN';
+                    }).ammount += req.body.toGet;
 
-            _.find(user.wallet, function(c) {
-                return c.code === req.body.code;
-            }).ammount -= req.body.sellUnits;
-            user.save();
-            return res.status(200).json(user.wallet);
+                    _.find(user.wallet, function(c) {
+                        return c.code === req.body.code;
+                    }).ammount -= req.body.sellUnits;
+                    user.save();
+                    return res.status(200).send({
+                        success: true,
+                        wallet: user.wallet
+                    });
+                }
+            });
         }
     });
 });

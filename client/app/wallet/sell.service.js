@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .factory('SellService', SellService);
-    SellService.$inject = ['$http'];
+    SellService.$inject = ['$http', 'ToastrService'];
 
-    function SellService($http) {
+    function SellService($http, ToastrService) {
         return {
             sell: sell
         }

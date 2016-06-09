@@ -22,8 +22,11 @@
         function getWallet() {
             return WalletService.getWallet()
                 .then(function(data) {
-                    vm.wallet = data;
-                    return vm.wallet;
+                    console.log(data);
+                    if (data.success) {
+                        vm.userWallet = data.wallet;
+                        return vm.wallet;
+                    }
                 });
         }
 
@@ -75,7 +78,7 @@
                 ToastrService.showToastr(false, 'You dont have enough money')
                 return;
             }
-            
+
             if ($scope.ammount !== 0) {
                 $("#sellDialog").removeClass("fade").modal("hide");
                 $("#sellConfirmDialog").modal("show").addClass("fade");
@@ -95,9 +98,10 @@
             }
             clearSellData();
             SellService.sell(sellData)
-                .then(function(wallet) {
-                    WalletService.wallet = wallet;
-                    console.log(wallet);
+                .then(function(data) {
+                    if (data.success) {
+                        WalletService.wallet = data.wallet;
+                    }
                 }, function() {
                     console.log('Error');
                 })

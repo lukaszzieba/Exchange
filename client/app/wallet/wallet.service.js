@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .factory('WalletService', WalletService);
-    WalletService.$inject = ['$http'];
+    WalletService.$inject = ['$http', 'ToastrService'];
 
-    function WalletService($http) {
+    function WalletService($http, ToastrService) {
         var wallet;
         return {
             wallet: wallet,
@@ -24,8 +24,9 @@
                 return response.data;
             }
 
-            function walletFail() {
-                console.log('XHR Failed for getWallet.');
+            function walletFail(err) {
+                ToastrService.showToastr(false, err.data.msg)
+                return err;
             }
         }
     }
