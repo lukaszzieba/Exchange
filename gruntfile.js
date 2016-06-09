@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                beautify: true,
+                beautify: false,
                 mangle: false,
                 except: ['jQuery', 'angular']
             },
