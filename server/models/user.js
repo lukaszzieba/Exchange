@@ -34,7 +34,7 @@ function createDefaultUsers() {
             User.create({
                 firstName: 'joe',
                 lastName: 'joe',
-                email: 'joe',
+                email: 'joe@joe.com',
                 password: bcrypt.hashSync('joe', bcrypt.genSaltSync(10)),
                 wallet: [{
                     unit: 1,

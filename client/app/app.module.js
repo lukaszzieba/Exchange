@@ -8,7 +8,9 @@
             'ngWebSocket',
             'angular-storage',
             'angular-jwt',
-            
+            'ngAnimate',
+            'toastr',
+
 
             // dev
             'account.module'

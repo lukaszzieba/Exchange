@@ -11,6 +11,46 @@ var jwtCheck = jwt({
 
 app.use('/api/protected', jwtCheck);
 
+app.get('/api/protected/user', function(req, res) {
+    User.findOne({
+        email: req.user.email
+    }, function(err, user) {
+        if (user) {
+            // var toUpdate = {
+            //     firstName: user.firstName,
+            //     lastName: user.lastName
+            // }
+            return res.status(200).json(user);
+        }
+    });
+});
+
+app.put('/api/protected/user', function(req, res) {
+    User.findOne({
+        email: req.user.email
+    }, function(err, user) {
+        if (user) {
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+            user.save();
+            return res.status(200).json(user);
+        }
+    });
+});
+
+app.put('/api/protected/wallet', function(req, res) {
+    console.log(req.body);
+    User.findOne({
+        email: req.user.email
+    }, function(err, user) {
+        if (user) {
+            user.wallet = req.body;
+            user.save();
+            return res.status(200).json(user);
+        }
+    });
+});
+
 app.get('/api/protected/wallet', function(req, res) {
     User.findOne({
         email: req.user.email
@@ -55,15 +95,15 @@ app.put('/api/protected/sell', function(req, res) {
         email: req.user.email
     }, function(err, user) {
         if (user) {
-          _.find(user.wallet, function(c) {
-              return c.code === 'PLN';
-          }).ammount += req.body.toGet;
+            _.find(user.wallet, function(c) {
+                return c.code === 'PLN';
+            }).ammount += req.body.toGet;
 
-          _.find(user.wallet, function(c) {
-              return c.code === req.body.code;
-          }).ammount -= req.body.sellUnits;
-          user.save();
-          return res.status(200).json(user.wallet);
+            _.find(user.wallet, function(c) {
+                return c.code === req.body.code;
+            }).ammount -= req.body.sellUnits;
+            user.save();
+            return res.status(200).json(user.wallet);
         }
     });
 });

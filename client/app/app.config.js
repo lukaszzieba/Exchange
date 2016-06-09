@@ -25,7 +25,10 @@
             })
             .state('register', {
                 url: "/register",
-                template: '<register></register>'
+                template: '<register></register>',
+                data: {
+                    notAllowLogedInUsers: true
+                }
             })
             .state('exchange', {
                 url: "/exchange",
@@ -33,7 +36,36 @@
                 data: {
                     requireLogin: true
                 }
+            })
+            .state('profile', {
+                url: "/profile",
+                template: '<profile></profile>',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('profile.main', {
+                url: "/main",
+                template: '<main></main>',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('profile.user', {
+                url: "/user",
+                template: '<user></user>',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('profile.wallet', {
+                url: "/wallet",
+                template: '<define-wallet></define-wallet>',
+                data: {
+                    requireLogin: true
+                }
             });
+
 
         // jwt interceptor gets token fom local storage and send to server with any request
         jwtInterceptorProvider.tokenGetter = function(store) {
@@ -50,11 +82,17 @@
 
         // prvent unauthenticated user go to excahnge
         $rootScope.$on('$stateChangeStart', function(e, to) {
-            console.log('state change');
+            var jwt = store.get('jwt');
             if (to.data && to.data.requireLogin) {
-                if (!store.get('jwt')) {
+                if (!jwt) {
                     e.preventDefault();
                     $state.go('home');
+                }
+            }
+            if (to.data && to.data.notAllowLogedInUsers) {
+                if (jwt) {
+                    e.preventDefault();
+                    $state.go('exchange');
                 }
             }
         });

@@ -55,16 +55,20 @@
         vm.sell = function(currency) {
             $scope.youHave = currency.ammount;
             vm.cur = currency;
-            console.log(vm.cur);
+            $('#sellDialog').modal('show');
         };
+
+        vm.sellSubmit = function() {
+            $("#sellDialog").removeClass("fade").modal("hide");
+            $("#sellConfirmDialog").modal("show").addClass("fade");
+        }
 
         $scope.$watch('ammount', function(newVal) {
             $scope.toGet = ($scope.ammount / vm.cur.unit) * vm.getUintPrice(vm.cur);
             $scope.youHave = vm.cur.ammount - newVal;
         });
 
-        vm.sellSubmit = function(currency) {
-          console.log('Sell sublit');
+        vm.sellConfirm = function(currency) {
             var sellData = {
                 code: vm.cur.code,
                 sellUnits: $scope.ammount,
@@ -77,10 +81,12 @@
                 }, function() {
 
                 })
+            $('#sellConfirmDialog').modal('hide');
         };
 
         vm.cancelSell = function() {
-            $('#sellModal').modal('hide');
+            $('#sellDialog').modal('hide');
+            $('#sellConfirmDialog').modal('hide');
             clearSellData();
         };
 

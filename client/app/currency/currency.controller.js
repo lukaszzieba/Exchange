@@ -23,13 +23,20 @@
         var p;
         vm.buy = function(currency) {
             vm.cur = currency;
+            $("#buyDialog").modal("show");
         };
 
         $scope.$watch('ammount', function() {
             $scope.toPay = ($scope.ammount / vm.cur.Unit) * vm.cur.PurchasePrice;
         });
 
+
         vm.buySubmit = function(currency) {
+            $("#buyDialog").removeClass("fade").modal("hide");
+            $("#confirmDialog").modal("show").addClass("fade");
+        };
+
+        vm.buyConfirm = function() {
             var buyData = {
                 code: vm.cur.Code,
                 ammount: $scope.ammount,
@@ -42,10 +49,12 @@
                 }, function() {
 
                 })
-        };
+            $("#buyDialog").modal("hide");
+        }
 
         vm.cancelBuy = function() {
-            $('#buyModal').modal('hide');
+            $("#buyDialog").modal("hide");
+            $("#confirmDialog").modal("hide");
             clearBuyData();
         };
 
@@ -54,28 +63,5 @@
             $scope.ammount = 0;
             $scope.toPay = 0;
         }
-
-        $('#buyModal').on('hide.bs.modal', function(event) {
-            clearBuyData();
-        });
-
-        // tets api
-        vm.public = function() {
-            $http.get('/api/public').then(function(responese) {
-                console.log(responese);
-                vm.message = responese.data;
-            }, function(err) {
-                console.log(err);
-            });
-        };
-
-        vm.protected = function() {
-            $http.get('/api/protected/wallet').then(function(responese) {
-                console.log(responese);
-                vm.message = responese.data;
-            }, function(err) {
-                console.log(err.data);
-            });
-        };
     }
 }());

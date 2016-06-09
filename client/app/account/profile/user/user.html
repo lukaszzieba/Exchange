@@ -1,0 +1,62 @@
+<div class="col-md-10 col-md-offset-1">
+    <h1>Update</h1>
+    <form name="update_form" novalidate ng-submit="signupForm(updateUser)">
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 form-control-label">First name</label>
+            <div class="col-sm-7">
+                <input class="form-control" ng-model="updateUser.firstName" type="text" id="name" name="name" required="required"/>
+            </div>
+            <div class="col-sm-3 error" ng-show="update_form.name.$dirty && update_form.name.$invalid && update_form.submitted ||
+                      update_form.name.$pristine && update_form.name.$invalid && update_form.submitted">
+                <div class="alert alert-danger" ng-show="update_form.name.$error.required" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Your name is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastName" class="col-sm-2 form-control-label">Last name</label>
+            <div class="col-sm-7">
+                <input class="form-control" ng-model="updateUser.lastName" type="text" id="lastName" name="lastName" required="required"/>
+            </div>
+            <div class="col-sm-3 error" ng-show="update_form.lastName.$dirty && update_form.lastName.$invalid && update_form.submitted ||
+                      update_form.lastName.$pristine && update_form.lastName.$invalid && update_form.submitted">
+                <div class="alert alert-danger" ng-show="update_form.lastName.$error.required" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Your lastname is required.
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group row">
+            <label for="password" class="col-sm-2 form-control-label">Password</label>
+            <div class="col-sm-7">
+                <input class="form-control" ng-model="updateUser.password" type="password" name="password" id="password" required="required"/>
+            </div>
+            <div class="col-sm-3 error" ng-show="update_form.password.$dirty && update_form.password.$invalid && update_form.submitted ||
+                      update_form.password.$pristine && update_form.password.$invalid && update_form.submitted">
+                <div class="alert alert-danger" ng-show="update_form.password.$error.required" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Your password is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 form-control-label">Repeat new nassword</label>
+            <div class="col-sm-7">
+                <input class="form-control" ng-model="updateUser.repPassword" type="password" name="repPassword" id="repPassword" required="required"/>
+            </div>
+            <div class="col-sm-3 error" ng-show="update_form.repPassword.$dirty && update_form.repPassword.$invalid && update_form.submitted ||
+                      update_form.repPassword.$pristine && update_form.repPassword.$invalid && update_form.submitted">
+                <div class="alert alert-danger" ng-show="update_form.repPassword.$error.required" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Your password is required.
+                </div>
+            </div>
+        </div> -->
+        <button type="submit" class="btn btn-default">Update</button>
+    </form>
+</div>

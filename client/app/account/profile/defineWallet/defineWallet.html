@@ -1,0 +1,49 @@
+<div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Define wallet</h3>
+        </div>
+        <form name="define_wallet" novalidate>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">
+                            Currency
+                        </th>
+                        <th class="col-md-4">
+                            Units
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cur in $ctrl.profile.wallet">
+                        <td>
+                            {{cur.code}}
+                        </td>
+                        <td>
+                            <input name="cur{{$index}}" class="form-control" type="number" min="0" step="{{cur.unit}}" name="units" ng-model="cur.ammount" required>
+                            <div class="error" ng-show="define_wallet['cur' + $index].$dirty && define_wallet['cur' + $index].$invalid ||
+                          define_wallet['cur' + $index].$pristine && define_wallet['cur' + $index].$invalid">
+                                <div class="alert alert-danger" ng-show="define_wallet['cur' + $index].$error.number" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Currency ammount must be valid number.
+                                </div>
+                                <div class="alert alert-danger" ng-show="define_wallet['cur' + $index].$error.required" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Currency ammount can not be emtpty.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-footer">
+                <button class="btn btn-primary" ng-click="$ctrl.saveWallet()">Save wallet</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- ng-show="define_wallet.name.$dirty && define_wallet.name.$invalid && define_wallet.submitted ||
+      define_wallet.name.$pristine && define_wallet.name.$invalid && define_wallet.submitted" -->
