@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .factory('SellService', SellService);
-    SellService.$inject = ['$http'];
+    SellService.$inject = ['$http', 'ToastrService'];
 
-    function SellService($http) {
+    function SellService($http, ToastrService) {
         return {
             sell: sell
         }
@@ -19,8 +19,9 @@
                 return responese.data;
             }
 
-            function sellFail() {
-                console.log('XHR Failed for getWallet.');
+            function sellFail(err) {
+              ToastrService.showToastr(false, err.data.msg)
+              return err;
             }
         }
     }

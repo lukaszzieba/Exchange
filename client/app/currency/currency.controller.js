@@ -4,12 +4,13 @@
     angular
         .module('exchangeApp')
         .controller('CurrencyController', CurrencyController);
-    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', '$http', '$filter'];
+    CurrencyController.$inject = ['CurrencyService', 'WalletService', 'BuyService', '$scope', '$rootScope', 'IdentyService', 'ToastrService', '$http', '$filter'];
 
-    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, $http, $filter) {
+    function CurrencyController(CurrencyService, WalletService, BuyService, $scope, $rootScope, IdentyService, ToastrService, $http, $filter) {
         var vm = this;
         vm.currencies = [];
         vm.currencies = CurrencyService;
+        vm.userWallet = WalletService;
 
         // show/hide buy button
         vm.showAction = function() {
@@ -32,8 +33,17 @@
 
 
         vm.buySubmit = function(currency) {
+          if($scope.ammount !== 0 && $scope.toPay !==0) {
+            if (vm.userWallet.wallet[0].ammount < $scope.toPay) {
+                $("#buyDialog").modal("hide");
+                $("#confirmDialog").modal("hide");
+                clearBuyData();
+                ToastrService.showToastr(false, 'You dont have enough money')
+                return;
+            }
             $("#buyDialog").removeClass("fade").modal("hide");
             $("#confirmDialog").modal("show").addClass("fade");
+          }            
         };
 
         vm.buyConfirm = function() {
@@ -44,12 +54,14 @@
             }
             clearBuyData();
             BuyService.buy(buyData)
-                .then(function(wallet) {
-                    WalletService.wallet = wallet;
-                }, function() {
-
+                .then(function(data) {
+                  if(data.success) {
+                    WalletService.wallet = data.wallet;
+                  }
+                }, function(err) {
+                  console.log('Buy fail');
                 })
-            $("#buyDialog").modal("hide");
+            $("#confirmDialog").modal("hide");
         }
 
         vm.cancelBuy = function() {
