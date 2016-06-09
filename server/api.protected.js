@@ -74,6 +74,7 @@ app.post('/api/protected/wallet', function(req, res) {
 
 app.put('/api/protected/buy', function(req, res) {
     Exchange.findOne({}, function(err, exchange) {
+        console.log(req.body);
         var curToBuy = _.find(exchange.currencies, function(w) {
             return w.code === req.body.code;
         });
@@ -84,6 +85,7 @@ app.put('/api/protected/buy', function(req, res) {
             });
         } else {
             curToBuy.ammount -= req.body.ammount;
+            exchange.currencies[0].ammount += req.body.toPay;
             exchange.save();
             User.findOne({
                 email: req.user.email
