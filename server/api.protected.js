@@ -2,7 +2,8 @@ var express = require('express'),
     jwt = require('express-jwt'),
     _ = require('lodash'),
     config = require('./config'),
-    User = require('mongoose').model('User');
+    User = require('mongoose').model('User'),
+    Exchange = require('mongoose').model('Exchange');
 
 var app = express.Router();
 var jwtCheck = jwt({

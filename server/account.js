@@ -10,13 +10,9 @@ var token;
 var User = require('mongoose').model('User');
 
 function createToken(user) {
-    console.log(user);
     token = jwt.sign(_.omit(user, 'password'), config.secret, {
         expiresIn: 9000000
     });
-    // Logs
-    console.log('On token create:');
-    console.log(token);
     return token;
 }
 
@@ -55,8 +51,8 @@ app.post('/register', function(req, res) {
                 wallet: user.wallet
             }
             res.status(201).send({
-                success : true,
-                msg : 'User create success',
+                success: true,
+                msg: 'User create success',
                 id_token: createToken(userToken)
             });
         }

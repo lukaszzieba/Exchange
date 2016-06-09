@@ -78,8 +78,9 @@
             SellService.sell(sellData)
                 .then(function(wallet) {
                     WalletService.wallet = wallet;
+                    console.log(wallet);
                 }, function() {
-
+                  console.log('Error');
                 })
             $('#sellConfirmDialog').modal('hide');
         };

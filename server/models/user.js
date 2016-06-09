@@ -39,11 +39,11 @@ function createDefaultUsers() {
                 wallet: [{
                     unit: 1,
                     code: 'PLN',
-                    ammount: 1000
+                    ammount: 100
                 }, {
                     unit: 1,
                     code: 'GBP',
-                    ammount: 100
+                    ammount: 0
                 }, {
                     unit: 1,
                     code: 'EUR',
