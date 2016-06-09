@@ -13,4 +13,4 @@
             return state === $rootScope.currentState;
         }
     }
-}())
+}());

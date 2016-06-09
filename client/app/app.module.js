@@ -10,6 +10,7 @@
             'angular-jwt',
             'ngAnimate',
             'toastr',
+            'ngLodash',
 
 
             // dev
