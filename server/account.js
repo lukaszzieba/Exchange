@@ -37,7 +37,7 @@ app.post('/register', function(req, res) {
     user.lastName = req.body.lastName;
     user.email = req.body.email;
     user.password = hash;
-    user.wallet = []
+    user.wallet = generateWallet();
 
     User.create(user, function(err, user) {
         if (err) {
@@ -63,6 +63,38 @@ app.post('/register', function(req, res) {
         }
     });
 });
+
+function generateWallet() {
+    return [{
+        unit: 1,
+        code: 'PLN',
+        ammount: 1000
+    }, {
+        unit: 1,
+        code: 'GBP',
+        ammount: 100
+    }, {
+        unit: 1,
+        code: 'EUR',
+        ammount: 0
+    }, {
+        unit: 1,
+        code: 'USD',
+        ammount: 0
+    }, {
+        unit: 100,
+        code: 'CZK',
+        ammount: 0
+    }, {
+        unit: 1,
+        code: 'CHF',
+        ammount: 0
+    }, {
+        unit: 0,
+        code: 'RUB',
+        ammount: 0
+    }]
+}
 
 app.post('/login', function(req, res) {
     if (!req.body.email || !req.body.password) {

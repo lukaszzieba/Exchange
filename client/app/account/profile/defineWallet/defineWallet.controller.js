@@ -4,9 +4,9 @@
     angular
         .module('exchangeApp')
         .controller('DefineWalletController', DefineWalletController);
-    DefineWalletController.$inject = ['DefineWalletService'];
+    DefineWalletController.$inject = ['DefineWalletService', '$scope'];
 
-    function DefineWalletController(DefineWalletService) {
+    function DefineWalletController(DefineWalletService, $scope) {
         var vm = this;
         vm.profile;
 
@@ -28,10 +28,15 @@
         }
 
         vm.saveWallet = function() {
-            DefineWalletService.saveWallet(vm.profile.wallet)
-                .then(function(data) {
-                  console.log(data);
-                });
+            $scope.define_wallet.submitted = false;
+
+            if ($scope.define_wallet.$valid) {
+                DefineWalletService.saveWallet(vm.profile.wallet)
+                    .then(function(data) {
+                        console.log(data);
+                    });
+            }
+            console.log('invalid');
         }
     }
 }());

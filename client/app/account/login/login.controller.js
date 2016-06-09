@@ -19,15 +19,14 @@
                     .then(function(response) {
                         store.set('jwt', response.data.id_token);
                         var t = IdentyService.getDecodedToken();
-                        IdentyService.currentUser = t;
-                        console.log(t);
+                        IdentyService.currentUser = t;                        
                         $state.go('exchange');
                         vm.userData = {}
                     }, function(err) {
                         console.log(err);
                     });
             } else {
-                $scope.login_form.submitted = true;                
+                $scope.login_form.submitted = true;
             }
         }
 
