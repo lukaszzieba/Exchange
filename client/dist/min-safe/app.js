@@ -720,7 +720,7 @@
     angular
         .module('exchangeApp')
         .factory('BuyService', BuyService);
-        
+
     BuyService.$inject = ['$http', 'ToastrService']
 
     function BuyService($http, ToastrService) {
@@ -733,6 +733,8 @@
                 .then(buySuccess, buyFail);
 
             function buySuccess(responese) {
+              console.log(responese);
+                ToastrService.showToastr(true, responese.data.msg);
                 return responese.data;
             }
 
@@ -1003,6 +1005,7 @@
                 .then(sellSuccess, sellFail);
 
             function sellSuccess(responese) {
+                ToastrService.showToastr(true, responese.data.msg);
                 return responese.data;
             }
 
@@ -1114,8 +1117,8 @@
         $scope.$watch('ammount', function(newVal) {
             $scope.toGet = ($scope.ammount / vm.cur.unit) * vm.getUintPrice(vm.cur);
             $scope.youHave = vm.cur.ammount - newVal;
-            if($scope.youHave === NaN) {
-              $scope.youHave = 0;
+            if (isNaN($scope.youHave)) {
+                $scope.youHave = "You don't have enough ";
             }
         });
 
