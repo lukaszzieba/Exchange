@@ -21,7 +21,7 @@
 
         function getWallet() {
             return WalletService.getWallet()
-                .then(function(data) {                  
+                .then(function(data) {
                     if (data.success) {
                         vm.userWallet = data.wallet;
                         return vm.wallet;
@@ -87,6 +87,9 @@
         $scope.$watch('ammount', function(newVal) {
             $scope.toGet = ($scope.ammount / vm.cur.unit) * vm.getUintPrice(vm.cur);
             $scope.youHave = vm.cur.ammount - newVal;
+            if (isNaN($scope.youHave)) {
+                $scope.youHave = "You don't have enough ";
+            }
         });
 
         vm.sellConfirm = function(currency) {

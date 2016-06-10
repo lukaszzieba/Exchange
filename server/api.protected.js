@@ -16,7 +16,7 @@ app.get('/api/protected/user', function(req, res) {
     User.findOne({
         email: req.user.email
     }, function(err, user) {
-        if (user) {          
+        if (user) {
             return res.status(200).json(user);
         }
     });
@@ -77,7 +77,7 @@ app.put('/api/protected/buy', function(req, res) {
         if (curToBuy.ammount < req.body.ammount) {
             return res.status(400).send({
                 success: false,
-                msg: 'Sorry currently we have ' + curToBuy.ammount + ' ' + req.body.code + '.\nPlease tyy again leater.'
+                msg: 'Sorry currently we have ' + curToBuy.ammount + ' ' + req.body.code + '.\nPlease try again leater.'
             });
         } else {
             curToBuy.ammount -= req.body.ammount;
@@ -97,6 +97,7 @@ app.put('/api/protected/buy', function(req, res) {
                     user.save();
                     return res.status(200).send({
                         success: true,
+                        msg: 'Complete ' + req.body.ammount + ' ' + req.body.code + ' for ' + req.body.toPay + 'PLN',
                         wallet: user.wallet
                     });
                 }
@@ -114,7 +115,7 @@ app.put('/api/protected/sell', function(req, res) {
         if (pln.ammount < req.body.toGet) {
             return res.status(400).send({
                 success: false,
-                msg: 'Sorry currently we have ' + pln.ammount + ' ' + pln.code + '.\nPlease tyy again leater.'
+                msg: 'Sorry currently we have ' + pln.ammount + ' ' + pln.code + '.\nPlease try again leater.'
             })
         } else {
             pln.ammount -= req.body.toGet;
@@ -133,6 +134,7 @@ app.put('/api/protected/sell', function(req, res) {
                     user.save();
                     return res.status(200).send({
                         success: true,
+                        msg: 'Complete sell ' + req.body.sellUnits + ' ' + req.body.code + 'for ' + req.body.toGet + 'PLN',
                         wallet: user.wallet
                     });
                 }

@@ -17,6 +17,7 @@
                 .then(sellSuccess, sellFail);
 
             function sellSuccess(responese) {
+                ToastrService.showToastr(true, responese.data.msg);
                 return responese.data;
             }
 

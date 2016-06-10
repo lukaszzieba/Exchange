@@ -1,0 +1,32 @@
+Instrukcja uruchomienia aplikacji exchange w œrodowisku developerskim
+
+1. Instalacja Node.js
+1.1. Ze strony https://nodejs.org/en/ nale¿y pobraæ wersjê v.4.4.5 LTS
+1.2. Instalacja pobranego pakietu
+1.3. Otwieramy Command Prompt i wpisujemy node –version
+1.4 je¿eli konsola wypisa³a 'v.4.4.5' node zosta³ prawid³owo zainstalowany
+1.5. w konsoli wpisujemy npm –v
+1.6 je¿eli konsola wypisa³a '2.15.5' node i npm zosa³y prawid³owo zainstalowane
+
+2. Instalacja MongoDB
+2.1. Ze strony https://www.mongodb.com/download-center?jmp=nav#community nale¿y pobraæ wersjê Windows Server 2008 R2 and letter, with SLL support
+2.2 Instalacja pobranego pakietu
+2.3 Dodajemy MongoDB do zmiwnnej sdowikowej PATH. Prawym przycskiem myszy klilamt na Mój komputer => wa³aœciwoœci
+=> Zaawansowane ustawienia systemu => Zmienne œrodowiskowe => Zaznaczmy PATH => edytuj => dodajemy scie¿ke instalacyjna MongoDb (domyœlnie C:\Program Files\MongoDB\Server\3.2\bin)
+=> OK
+2.4 nastêpnie stowrzyæ foldery  C:\data
+				C:\data\db
+				C:\data\log
+2.5 z folrderu w kórym zainstalowane MongDB (domyœlnie C:\Program Files\MongoDB\Server\3.2\bin) uruchamiamy mongod.exe i mongo.exe (nie zaszkodzi ponownie uruchomienie komputera)
+
+3. Uruchamianie aplikacji
+3.1 w cmd idziemy do cia¿ki aplikacji cd sciezka/Exchage
+3.2 wpisujemy kolejno:  npn install
+			npm install bower -g 
+			bower install (wymaga zainstalowanego gita dodanego do PATH)
+3.3 otwieramy now¹ konsole cmd 
+3.4 wpisujemy: mongod (uruchamia server mongoDB)
+3.5 w pierwszej konsoli wpisujemy: node server.js
+3.6 w pasku url przegl¹darki wpisujemy: localhost:8080
+
+

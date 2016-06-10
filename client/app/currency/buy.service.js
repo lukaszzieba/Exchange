@@ -4,7 +4,7 @@
     angular
         .module('exchangeApp')
         .factory('BuyService', BuyService);
-        
+
     BuyService.$inject = ['$http', 'ToastrService']
 
     function BuyService($http, ToastrService) {
@@ -17,6 +17,8 @@
                 .then(buySuccess, buyFail);
 
             function buySuccess(responese) {
+              console.log(responese);
+                ToastrService.showToastr(true, responese.data.msg);
                 return responese.data;
             }
 
